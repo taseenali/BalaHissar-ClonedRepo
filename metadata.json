@@ -1,0 +1,9 @@
+
+{
+  "name": "Bala Hissar Restaurant - Production Ready System",
+  "description": "A comprehensive, high-performance restaurant management and booking system built with React, TypeScript, and Tailwind CSS, featuring automated availability checks and an admin dashboard.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

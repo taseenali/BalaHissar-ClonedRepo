@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* Custom theme variables for Tailwind CSS v4 */
+@theme {
+    --color-primary: #C5A059;
+    --color-secondary: #1A2F2B;
+    --color-accent: #EBE3D5;
+    --color-dark: #0D1514;
+
+    --font-family-serif: 'Playfair Display', serif;
+    --font-family-sans: 'Plus Jakarta Sans', sans-serif;
+
+    --animate-fade-in: fadeIn 1s ease-out forwards;
+    --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Base styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #0D1514;
+    color: #EBE3D5;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scrollbar-width: thin;
+    scrollbar-color: #C5A059 #0D1514;
+}
+
+.font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Custom scrollbar for modern browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0D1514;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #C5A059;
+    border-radius: 10px;
+}
