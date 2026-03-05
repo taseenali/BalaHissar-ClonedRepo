@@ -1,20 +1,42 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { restaurantContent } from '@/data/content';
+import { smoothScrollTo } from '@/utils/scroll';
+import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 const navItems = [
-    { label: 'About', href: '/#about' },
-    { label: 'Buffet', href: '/#buffet' },
-    { label: 'Gallery', href: '/#gallery' },
-    { label: 'Menu', href: '/menu' },
-    { label: 'Event Hall', href: '/event-hall' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '/#about', isAnchor: true },
+    { label: 'Buffet', href: '/#buffet', isAnchor: true },
+    { label: 'Gallery', href: '/#gallery', isAnchor: true },
+    { label: 'Menu', href: '/menu', isAnchor: false },
+    { label: 'Event Hall', href: '/event-hall', isAnchor: false },
+    { label: 'Contact', href: '/contact', isAnchor: false },
 ];
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
+    const pathname = usePathname();
+    const activeSection = useScrollSpy(['home', 'about', 'buffet', 'gallery', 'footer']);
+
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor?: boolean) => {
+        if (!isAnchor) return;
+        if (pathname === '/') {
+            e.preventDefault();
+            const targetId = href.replace('/#', '');
+            if (targetId === 'home') {
+                smoothScrollTo('home');
+                window.history.pushState(null, '', '/');
+                return;
+            }
+            smoothScrollTo(targetId);
+            window.history.pushState(null, '', `/#${targetId}`);
+        }
+    };
 
     return (
-        <footer className="bg-dark border-t border-primary/10 py-20">
+        <footer id="footer" className="bg-dark border-t border-primary/10 py-20">
             <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16">
                 <div className="col-span-2">
                     <h3 className="text-3xl font-serif text-primary mb-8 tracking-widest">
@@ -38,13 +60,27 @@ export function Footer() {
                 <div>
                     <h4 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-8">Navigation</h4>
                     <ul className="text-xs text-accent/50 space-y-4 uppercase tracking-widest font-bold">
-                        {navItems.map(item => (
-                            <li key={item.href}>
-                                <Link href={item.href} className="hover:text-white transition">
-                                    {item.label}
-                                </Link>
-                            </li>
-                        ))}
+                        {navItems.map(item => {
+                            const targetId = item.href.replace('/#', '');
+                            const isActive = item.isAnchor
+                                ? pathname === '/' && activeSection === targetId
+                                : pathname === item.href;
+
+                            return (
+                                <li key={item.href}>
+                                    <Link
+                                        href={item.href}
+                                        onClick={(e) => handleScroll(e, item.href, item.isAnchor)}
+                                        className={`transition-colors relative ${isActive ? 'text-white' : 'hover:text-white'}`}
+                                    >
+                                        {item.label}
+                                        {isActive && (
+                                            <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-primary rounded-full animate-fade-in" />
+                                        )}
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
 

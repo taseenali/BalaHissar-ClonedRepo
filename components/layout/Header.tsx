@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { restaurantContent } from '@/data/content';
 import { MobileMenu } from './MobileMenu';
 import { smoothScrollTo } from '@/utils/scroll';
+import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 const navItems = [
     { label: 'About', href: '/#about', isAnchor: true },
@@ -18,6 +19,7 @@ const navItems = [
 export function Header() {
     const pathname = usePathname();
     const router = useRouter();
+    const activeSection = useScrollSpy(['home', 'about', 'buffet', 'gallery', 'footer']);
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
         if (!isAnchor) return;
@@ -28,7 +30,7 @@ export function Header() {
             const targetId = href.replace('/#', '');
 
             if (targetId === 'home') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                smoothScrollTo('home');
                 window.history.pushState(null, '', '/');
                 return;
             }
@@ -53,16 +55,27 @@ export function Header() {
                 </Link>
 
                 <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8 text-xs uppercase tracking-widest font-bold">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={(e) => handleScroll(e, item.href, item.isAnchor)}
-                            className="hover:text-primary transition-all duration-300 relative py-2 text-accent/70"
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
+                    {navItems.map((item) => {
+                        const targetId = item.href.replace('/#', '');
+                        const isActive = item.isAnchor
+                            ? pathname === '/' && activeSection === targetId
+                            : pathname === item.href;
+
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={(e) => handleScroll(e, item.href, item.isAnchor)}
+                                className={`transition-all duration-300 relative py-2 ${isActive ? 'text-white' : 'text-accent/70 hover:text-primary'
+                                    }`}
+                            >
+                                {item.label}
+                                {isActive && (
+                                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary rounded-full animate-fade-in-up" />
+                                )}
+                            </Link>
+                        );
+                    })}
                 </div>
 
                 {/* Mobile Menu Toggle */}

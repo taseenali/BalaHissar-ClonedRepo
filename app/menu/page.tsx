@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function MenuPage() {
     return (
-        <section className="py-24 max-w-6xl mx-auto px-6">
+        <section className="py-16 md:py-24 max-w-6xl mx-auto px-6">
             <header className="text-center mb-20">
                 <h1 className="text-5xl font-serif mb-6 italic">Our Menus</h1>
                 <p className="text-accent/60 max-w-2xl mx-auto uppercase tracking-[0.2em] text-xs font-bold">
@@ -130,7 +130,7 @@ function MenuSection({ title, timing, description, categories, isBuffet, priceIn
                                         {item.price && <span className="text-primary font-bold text-sm">£{item.price}</span>}
                                     </div>
                                     {item.description && (
-                                        <p className="text-accent/50 text-sm leading-relaxed">
+                                        <p className="text-accent/70 text-sm leading-relaxed">
                                             {item.description}
                                         </p>
                                     )}

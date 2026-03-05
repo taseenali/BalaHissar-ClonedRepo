@@ -30,8 +30,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={`${playfair.variable} ${jakarta.variable}`}>
-            <body className="min-h-screen flex flex-col bg-dark text-accent selection:bg-primary selection:text-dark font-sans">
+        <html lang="en" className={`${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
+            <body className="min-h-screen flex flex-col bg-dark text-accent selection:bg-primary selection:text-dark font-sans" suppressHydrationWarning>
                 {/* Accessibility: Skip to main content */}
                 <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-6 focus:py-3 focus:bg-primary focus:text-dark focus:font-bold focus:rounded outline-none">
                     Skip to main content

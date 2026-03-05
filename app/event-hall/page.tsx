@@ -69,7 +69,7 @@ export default function EventHallPage() {
                     </div>
                     <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/5 group">
                         <Image
-                            src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
+                            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop"
                             alt="Venue setup"
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
@@ -109,7 +109,7 @@ export default function EventHallPage() {
                         {/* Card 2 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
                             <Image
-                                src="https://images.unsplash.com/photo-1505236858274-0959ac156d7f?q=80&w=2000&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2000&auto=format&fit=crop"
                                 alt="Corporate Events"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -127,7 +127,7 @@ export default function EventHallPage() {
                         {/* Card 3 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
                             <Image
-                                src="https://images.unsplash.com/photo-1530103862676-de3c9a59af57?q=80&w=2000&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2000&auto=format&fit=crop"
                                 alt="Private Parties"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 33vw"
