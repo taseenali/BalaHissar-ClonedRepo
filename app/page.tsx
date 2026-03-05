@@ -7,14 +7,14 @@ import { restaurantContent } from '@/data/content';
 // Explicit unique metadata for Home page
 export const metadata: Metadata = {
     title: 'Bala Hissar | Authentic Afghan & Persian Restaurant in West Wickham',
-    description: 'Experience the finest authentic Afghan and Persian cuisine at Bala Hissar restaurant in West Wickham. Traditional dishes including Kabuli Palow, kebabs, buffet, and more. Book your table today.',
+    description: 'Experience the finest authentic Afghan and Persian cuisine at Bala Hissar restaurant in West Wickham. Traditional dishes including Kabuli Palow, kebabs, buffet, and more.',
     alternates: {
-        canonical: 'https://mybalahissar.co.uk/',
+        canonical: 'https://mybalahissar.co.uk',
     },
     openGraph: {
         title: 'Bala Hissar | Authentic Afghan & Persian Restaurant',
         description: 'Experience the finest authentic Afghan and Persian cuisine in West Wickham.',
-        url: 'https://mybalahissar.co.uk/',
+        url: 'https://mybalahissar.co.uk',
         siteName: 'Bala Hissar Restaurant',
         type: 'website',
     },
@@ -192,13 +192,7 @@ export default function HomePage() {
                     </div>
 
                     <div className="text-center mt-16">
-                        <Link
-                            href="/book-table"
-                            className="bg-primary text-dark px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 shadow-xl inline-block"
-                        >
-                            Book A Table
-                        </Link>
-                        <p className="text-accent/30 text-xs mt-4 uppercase tracking-widest">Walk-ins welcome subject to availability</p>
+                        <p className="text-accent text-lg mt-4 uppercase tracking-widest border border-primary/20 inline-block px-8 py-4 rounded-full bg-secondary/10">Walk-ins always welcome</p>
                     </div>
                 </div>
             </section>

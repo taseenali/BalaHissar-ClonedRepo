@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
     // Enable React strict mode for highlighting potential problems
     reactStrictMode: true,
 
+    // Enforce no trailing slashes for clean URLs
+    trailingSlash: false,
+
     // Image optimization configuration
     images: {
         remotePatterns: [
@@ -25,11 +28,6 @@ const nextConfig: NextConfig = {
                 source: '/home',
                 destination: '/',
                 permanent: true, // 301 redirect
-            },
-            {
-                source: '/booking',
-                destination: '/book-table',
-                permanent: true,
             },
         ];
     },

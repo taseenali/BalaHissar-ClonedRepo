@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { smoothScrollTo } from '@/utils/scroll';
 
 /**
  * Client-side handler for legacy hash-based URLs.
- * Only redirects to actual page routes (menu, contact, book-table).
+ * Only redirects to actual page routes (menu, contact).
  * Section anchors (about, gallery, buffet) are handled natively by the browser.
  */
 export function HashRedirectHandler() {
@@ -19,24 +20,36 @@ export function HashRedirectHandler() {
         const hash = window.location.hash;
         if (!hash) return;
 
-        // Map old hash routes to actual page routes ONLY
-        // #about, #gallery, #buffet are now sections on home page - browser handles these natively
+        // Map old hash routes to actual page routes
         const hashRouteMap: Record<string, string> = {
             '#menu': '/menu',
             '#contact': '/contact',
-            '#booking': '/book-table',
         };
 
         const newRoute = hashRouteMap[hash];
         if (newRoute) {
-            // Replace current URL to simulate 301 behavior (no back button to hash URL)
             router.replace(newRoute);
-        } else if (hash === '#home') {
-            // Clear hash for home - scroll to top
+            return;
+        }
+
+        // Handle Cross-Page Navigation to Homepage Sections (e.g. from /menu to /#about)
+        if (['#about', '#buffet', '#gallery'].includes(hash)) {
+            const targetId = hash.replace('#', '');
+
+            // To prevent Next.js from skipping the smooth scroll, we immediately push them to the top
+            // of the DOM momentarily on page render, then force a manual smooth scroll to the target.
+            window.scrollTo(0, 0);
+
+            setTimeout(() => {
+                smoothScrollTo(targetId);
+            }, 50); // Small 50ms buffer allows the browser to paint the DOM height correctly first
+            return;
+        }
+
+        if (hash === '#home') {
             window.history.replaceState(null, '', '/');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        // For #about, #gallery, #buffet - do nothing, browser handles anchor scrolling
     }, [pathname, router]);
 
     return null;

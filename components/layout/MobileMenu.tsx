@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { smoothScrollTo } from '@/utils/scroll';
 
 interface NavItem {
     label: string;
@@ -12,6 +14,7 @@ interface NavItem {
 
 export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
 
     // Prevent scrolling when menu is open
     useEffect(() => {
@@ -22,6 +25,24 @@ export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
         }
         return () => { document.body.style.overflow = 'unset'; };
     }, [isOpen]);
+
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
+        if (!isAnchor) return;
+
+        if (pathname === '/') {
+            e.preventDefault();
+            const targetId = href.replace('/#', '');
+
+            // Close menu immediately
+            setIsOpen(false);
+
+            // Give a tiny delay for menu exit animation before sliding
+            setTimeout(() => {
+                smoothScrollTo(targetId);
+                window.history.pushState(null, '', `/#${targetId}`);
+            }, 100);
+        }
+    };
 
     return (
         <div className="lg:hidden">
@@ -67,28 +88,19 @@ export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
                                 >
                                     <Link
                                         href={item.href}
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={(e) => {
+                                            if (item.isAnchor) {
+                                                handleScroll(e, item.href, item.isAnchor);
+                                            } else {
+                                                setIsOpen(false);
+                                            }
+                                        }}
                                         className="text-2xl font-serif text-white hover:text-primary transition-colors"
                                     >
                                         {item.label}
                                     </Link>
                                 </motion.div>
                             ))}
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 }}
-                                className="mt-8"
-                            >
-                                <Link
-                                    href="/book-table"
-                                    onClick={() => setIsOpen(false)}
-                                    className="bg-primary text-dark px-10 py-4 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white transition-colors shadow-lg shadow-primary/20"
-                                >
-                                    Book Table
-                                </Link>
-                            </motion.div>
                         </nav>
                     </motion.div>
                 )}

@@ -45,11 +45,6 @@ export function Footer() {
                                 </Link>
                             </li>
                         ))}
-                        <li>
-                            <Link href="/book-table" className="hover:text-white transition">
-                                Reservations
-                            </Link>
-                        </li>
                     </ul>
                 </div>
 
