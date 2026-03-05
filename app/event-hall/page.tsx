@@ -28,6 +28,7 @@ export default function EventHallPage() {
                     alt="Elegant Event Hall Ambience"
                     fill
                     priority
+                    sizes="100vw"
                     className="object-cover object-center opacity-60 transform scale-105"
                 />
 
@@ -66,10 +67,13 @@ export default function EventHallPage() {
                             Our dedicated events team works closely with you to curate every detail, from bespoke menus featuring our signature Afghan cuisine to ambient lighting and décor arrangements.
                         </p>
                     </div>
-                    <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/5">
-                        <div
-                            className="absolute inset-0 bg-cover bg-center hover:scale-105 transition-transform duration-700 ease-out"
-                            style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop")' }}
+                    <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/5 group">
+                        <Image
+                            src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
+                            alt="Venue setup"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                         />
                     </div>
                 </div>
@@ -86,8 +90,13 @@ export default function EventHallPage() {
                     <div className="grid md:grid-cols-3 gap-8">
                         {/* Card 1 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
-                            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                                style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop")' }} />
+                            <Image
+                                src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
+                                alt="Weddings and Receptions"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                 <h3 className="text-2xl font-serif text-white mb-2">Weddings & Receptions</h3>
@@ -99,8 +108,13 @@ export default function EventHallPage() {
 
                         {/* Card 2 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
-                            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                                style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1505236858274-0959ac156d7f?q=80&w=2000&auto=format&fit=crop")' }} />
+                            <Image
+                                src="https://images.unsplash.com/photo-1505236858274-0959ac156d7f?q=80&w=2000&auto=format&fit=crop"
+                                alt="Corporate Events"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                 <h3 className="text-2xl font-serif text-white mb-2">Corporate Events</h3>
@@ -112,8 +126,13 @@ export default function EventHallPage() {
 
                         {/* Card 3 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
-                            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                                style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1530103862676-de3c9a59af57?q=80&w=2000&auto=format&fit=crop")' }} />
+                            <Image
+                                src="https://images.unsplash.com/photo-1530103862676-de3c9a59af57?q=80&w=2000&auto=format&fit=crop"
+                                alt="Private Parties"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                 <h3 className="text-2xl font-serif text-white mb-2">Private Parties</h3>
