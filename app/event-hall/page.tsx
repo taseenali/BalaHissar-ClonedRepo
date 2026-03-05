@@ -21,7 +21,7 @@ export default function EventHallPage() {
     return (
         <main className="min-h-screen bg-dark">
             {/* Hero Section */}
-            <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+            <section className="relative min-h-[85vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-dark/50 z-10" />
                 <Image
                     src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
