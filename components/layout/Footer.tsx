@@ -91,6 +91,10 @@ export function Footer() {
                     </p>
                     <div className="flex gap-2">
                         <input
+                            id="newsletter-email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
                             className="bg-secondary/40 border border-primary/20 rounded-lg p-3 text-xs flex-grow focus:outline-none focus:border-primary"
                             placeholder="EMAIL ADDRESS"
                         />
