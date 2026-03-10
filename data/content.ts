@@ -19,14 +19,14 @@ Our chefs utilize traditional cooking methods, charcoal grills, and high-quality
   ],
   galleryCategories: {
     food: [
-      { url: "/images/gallery/food/breakfast-paratha.jpeg", title: "Fresh Starters" },
-      { url: "/images/gallery/food/qabili-palaw.jpeg", title: "Kabuli Palow" },
-      { url: "/images/gallery/food/chapli-kebab.jpeg", title: "Mixed Grill" },
-      { url: "/images/gallery/food/soup-stew.jpeg", title: "Vegetarian Delights" }
+      { url: "/images/gallery/food/breakfast-paratha.webp", title: "Fresh Starters" },
+      { url: "/images/gallery/food/qabili-palaw.webp", title: "Kabuli Palow" },
+      { url: "/images/gallery/food/chapli-kebab.webp", title: "Mixed Grill" },
+      { url: "/images/gallery/food/soup-stew.webp", title: "Vegetarian Delights" }
     ],
     ambience: [
-      { url: "/images/gallery/ambience/dining-hall.jpeg", title: "Dining Hall" },
-      { url: "/images/gallery/ambience/interior-perspective.jpeg", title: "Traditional Decor" }
+      { url: "/images/gallery/ambience/dining-hall.webp", title: "Dining Hall" },
+      { url: "/images/gallery/ambience/interior-perspective.webp", title: "Traditional Decor" }
     ]
   }
 };

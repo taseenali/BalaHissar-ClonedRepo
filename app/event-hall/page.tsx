@@ -24,7 +24,7 @@ export default function EventHallPage() {
             <section className="relative min-h-[80vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden px-4 md:px-0">
                 <div className="absolute inset-0 bg-dark/50 z-10" />
                 <Image
-                    src="/images/event-hall/banqueting-hall.jpeg"
+                    src="/images/event-hall/banqueting-hall.webp"
                     alt="Elegant Event Hall Ambience"
                     fill
                     priority
@@ -69,7 +69,7 @@ export default function EventHallPage() {
                     </div>
                     <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/5 group">
                         <Image
-                            src="/images/event-hall/party-setup.jpeg"
+                            src="/images/event-hall/party-setup.webp"
                             alt="Venue setup"
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
@@ -91,7 +91,7 @@ export default function EventHallPage() {
                         {/* Card 1 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
                             <Image
-                                src="/images/event-hall/banqueting-hall.jpeg"
+                                src="/images/event-hall/banqueting-hall.webp"
                                 alt="Weddings and Receptions"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -109,7 +109,7 @@ export default function EventHallPage() {
                         {/* Card 2 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
                             <Image
-                                src="/images/event-hall/private-dining.jpeg"
+                                src="/images/event-hall/private-dining.webp"
                                 alt="Corporate Events"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -127,7 +127,7 @@ export default function EventHallPage() {
                         {/* Card 3 */}
                         <div className="group relative overflow-hidden rounded-xl aspect-[3/4]">
                             <Image
-                                src="/images/event-hall/party-setup.jpeg"
+                                src="/images/event-hall/party-setup.webp"
                                 alt="Private Parties"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 33vw"

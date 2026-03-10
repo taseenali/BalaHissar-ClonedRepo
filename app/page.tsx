@@ -28,7 +28,7 @@ export default function HomePage() {
             <section id="home" className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden scroll-mt-20">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/images/hero/home-hero.jpeg"
+                        src="/images/hero/home-hero.webp"
                         alt=""
                         fill
                         priority
@@ -99,7 +99,7 @@ export default function HomePage() {
                         className="relative group"
                     >
                         <Image
-                            src="/images/gallery/ambience/dining-hall.jpeg"
+                            src="/images/gallery/ambience/dining-hall.webp"
                             alt="Restaurant ambience at Bala Hissar"
                             width={600}
                             height={400}
