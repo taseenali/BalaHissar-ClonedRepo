@@ -19,14 +19,14 @@ Our chefs utilize traditional cooking methods, charcoal grills, and high-quality
   ],
   galleryCategories: {
     food: [
-      { url: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=800&auto=format&fit=crop", title: "Fresh Starters" },
-      { url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop", title: "Kabuli Palow" },
-      { url: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop", title: "Mixed Grill" },
-      { url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop", title: "Vegetarian Delights" }
+      { url: "/images/gallery/food/breakfast-paratha.jpeg", title: "Fresh Starters" },
+      { url: "/images/gallery/food/qabili-palaw.jpeg", title: "Kabuli Palow" },
+      { url: "/images/gallery/food/chapli-kebab.jpeg", title: "Mixed Grill" },
+      { url: "/images/gallery/food/soup-stew.jpeg", title: "Vegetarian Delights" }
     ],
     ambience: [
-      { url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop", title: "Dining Hall" },
-      { url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop", title: "Traditional Decor" }
+      { url: "/images/gallery/ambience/dining-hall.jpeg", title: "Dining Hall" },
+      { url: "/images/gallery/ambience/interior-perspective.jpeg", title: "Traditional Decor" }
     ]
   }
 };

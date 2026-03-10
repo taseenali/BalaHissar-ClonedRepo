@@ -36,16 +36,16 @@ export function Footer() {
     };
 
     return (
-        <footer id="footer" className="bg-dark border-t border-primary/10 py-20">
-            <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16">
+        <footer id="footer" className="bg-dark border-t border-primary/10 py-20 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-4 gap-12 md:gap-16">
                 <div className="col-span-2">
-                    <h3 className="text-3xl font-serif text-primary mb-8 tracking-widest">
+                    <h3 className="text-3xl md:text-4xl font-serif text-primary mb-6 md:mb-8 tracking-widest">
                         {restaurantContent.name.toUpperCase()}
                     </h3>
-                    <p className="text-accent/50 max-w-md leading-loose mb-10 text-sm italic">
+                    <p className="text-accent/50 max-w-md leading-loose mb-10 text-sm md:text-base italic">
                         "Bringing the vibrant soul of Afghan and Persian cuisine to West Wickham. A sanctuary of heritage and flavor."
                     </p>
-                    <div className="flex gap-6">
+                    <div className="flex flex-wrap gap-4 md:gap-6">
                         {['Instagram', 'Facebook', 'TripAdvisor'].map(social => (
                             <span
                                 key={social}
@@ -58,7 +58,7 @@ export function Footer() {
                 </div>
 
                 <div>
-                    <h4 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-8">Navigation</h4>
+                    <h4 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-6 md:mb-8">Navigation</h4>
                     <ul className="text-xs text-accent/50 space-y-4 uppercase tracking-widest font-bold">
                         {navItems.map(item => {
                             const targetId = item.href.replace('/#', '');
@@ -85,25 +85,25 @@ export function Footer() {
                 </div>
 
                 <div>
-                    <h4 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-8">Newsletter</h4>
+                    <h4 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-6 md:mb-8">Newsletter</h4>
                     <p className="text-xs text-accent/50 mb-6 font-bold uppercase tracking-widest">
                         Join our circle for seasonal updates
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-3">
                         <input
                             id="newsletter-email"
                             name="email"
                             type="email"
                             autoComplete="email"
-                            className="bg-secondary/40 border border-primary/20 rounded-lg p-3 text-xs flex-grow focus:outline-none focus:border-primary"
+                            className="bg-secondary/40 border border-primary/20 rounded-lg p-3 text-xs flex-grow focus:outline-none focus:border-primary w-full"
                             placeholder="EMAIL ADDRESS"
                         />
-                        <button className="bg-primary text-dark p-3 rounded-lg text-xs font-black">JOIN</button>
+                        <button className="bg-primary text-dark p-3 rounded-lg text-xs font-black whitespace-nowrap active:scale-95 transition-transform">JOIN</button>
                     </div>
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] text-accent/30 uppercase tracking-[0.4em] font-bold">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 mt-20 pt-10 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] text-accent/30 uppercase tracking-[0.4em] font-bold">
                 <div>&copy; {currentYear} {restaurantContent.name} Restaurant. All Rights Reserved.</div>
                 <div className="flex gap-8">
                     <span className="cursor-pointer hover:text-white">Privacy Policy</span>

@@ -1,11 +1,13 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { restaurantContent } from '@/data/content';
 import { MobileMenu } from './MobileMenu';
 import { smoothScrollTo } from '@/utils/scroll';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
     { label: 'About', href: '/#about', isAnchor: true },
@@ -20,41 +22,46 @@ export function Header() {
     const pathname = usePathname();
     const router = useRouter();
     const activeSection = useScrollSpy(['home', 'about', 'buffet', 'gallery', 'footer']);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
         if (!isAnchor) return;
-
-        // If we are already on the homepage, prevent default Next.js hard jump
         if (pathname === '/') {
             e.preventDefault();
             const targetId = href.replace('/#', '');
-
             if (targetId === 'home') {
                 smoothScrollTo('home');
                 window.history.pushState(null, '', '/');
                 return;
             }
-
-            // Execute custom ease-in-out slide effect
             smoothScrollTo(targetId);
-            // Cleanly update URL without triggering jump
             window.history.pushState(null, '', `/#${targetId}`);
         }
-        // If not on homepage, Next.js <Link> will navigate normally
     };
 
     return (
-        <header className="sticky top-0 z-50 bg-dark/95 border-b border-primary/20 backdrop-blur-md">
-            <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative" aria-label="Main navigation">
+        <header
+            className={`sticky top-0 z-50 transition-all duration-500 border-b ${isScrolled
+                    ? 'bg-dark/90 backdrop-blur-xl border-primary/20 py-2'
+                    : 'bg-dark/40 backdrop-blur-md border-white/5 py-4'
+                }`}
+        >
+            <nav className="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center relative" aria-label="Main navigation">
                 <Link
                     href="/#home"
                     onClick={(e) => handleScroll(e, '/#home', true)}
-                    className="text-2xl font-serif text-primary tracking-widest hover:opacity-80 transition whitespace-nowrap"
+                    className="text-xl md:text-2xl font-serif text-primary tracking-[0.3em] hover:text-white transition-all duration-500 whitespace-nowrap text-gradient-gold"
                 >
                     {restaurantContent.name.toUpperCase()}
                 </Link>
 
-                <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8 text-xs uppercase tracking-widest font-bold">
+                <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8 text-[11px] uppercase tracking-[0.3em] font-black">
                     {navItems.map((item) => {
                         const targetId = item.href.replace('/#', '');
                         const isActive = item.isAnchor
@@ -66,12 +73,15 @@ export function Header() {
                                 key={item.href}
                                 href={item.href}
                                 onClick={(e) => handleScroll(e, item.href, item.isAnchor)}
-                                className={`transition-all duration-300 relative py-2 ${isActive ? 'text-white' : 'text-accent/70 hover:text-primary'
+                                className={`transition-all duration-500 relative py-2 ${isActive ? 'text-white' : 'text-accent/60 hover:text-primary'
                                     }`}
                             >
                                 {item.label}
                                 {isActive && (
-                                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary rounded-full animate-fade-in-up" />
+                                    <motion.span
+                                        layoutId="navUnderline"
+                                        className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary rounded-full"
+                                    />
                                 )}
                             </Link>
                         );

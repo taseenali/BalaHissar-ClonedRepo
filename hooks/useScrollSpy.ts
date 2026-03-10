@@ -1,10 +1,21 @@
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function useScrollSpy(sectionIds: string[]) {
     const [activeSection, setActiveSection] = useState<string>('');
+    const pathname = usePathname();
 
     useEffect(() => {
-        // Wait for DOM to be fully loaded
+        // Immediately set active section from the URL hash if present
+        // This ensures correct highlight when navigating from other pages via /#about etc.
+        const hash = window.location.hash.replace('#', '');
+        if (hash && sectionIds.includes(hash)) {
+            setActiveSection(hash);
+        } else if (pathname === '/' && window.scrollY < 100) {
+            setActiveSection('home');
+        }
+
+        // Wait for DOM to be fully loaded, then set up the observer
         const timeoutId = setTimeout(() => {
             const observer = new IntersectionObserver(
                 (entries) => {
@@ -27,18 +38,13 @@ export function useScrollSpy(sectionIds: string[]) {
                 }
             });
 
-            // Set initial state based on scroll position safely
-            if (window.scrollY < 100) {
-                setActiveSection('home');
-            }
-
             return () => {
                 observer.disconnect();
             };
         }, 100);
 
         return () => clearTimeout(timeoutId);
-    }, [sectionIds.join(',')]); // Use joined string for stable dependency
+    }, [sectionIds.join(','), pathname]); // Re-run observer when route changes
 
     return activeSection;
 }
