@@ -43,16 +43,50 @@ export function Footer() {
                         {restaurantContent.name.toUpperCase()}
                     </h3>
                     <p className="text-accent/50 max-w-md leading-loose mb-10 text-sm md:text-base italic">
-                        "Bringing the vibrant soul of Afghan and Persian cuisine to West Wickham. A sanctuary of heritage and flavor."
+                        "Elevating the rich culinary traditions of Pakistan in the heart of Bradford. A haven of exceptional heritage and flavor."
                     </p>
-                    <div className="flex flex-wrap gap-4 md:gap-6">
-                        {['Instagram', 'Facebook', 'TripAdvisor'].map(social => (
-                            <span
-                                key={social}
-                                className="text-[10px] uppercase tracking-[0.3em] font-black text-primary hover:text-white transition cursor-pointer"
+                    <div className="flex items-center gap-6">
+                        {[
+                            { 
+                                icon: (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                                    </svg>
+                                ), 
+                                href: 'https://www.facebook.com/share/1H1bZdp5Vb/',
+                                label: 'Facebook'
+                            },
+                            { 
+                                icon: (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                                    </svg>
+                                ), 
+                                href: 'https://www.instagram.com/balahissarrestaurant?igsh=MXF1ZnRlcGRiczJ1Ng==',
+                                label: 'Instagram'
+                            },
+                            { 
+                                icon: (
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                        <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.33-.85.51-1.44 1.43-1.58 2.41-.14 1.01.23 2.06.94 2.81 1.24 1.23 3.29 1.34 4.67.24.61-.45.92-1.17.91-1.93-.02-3.13-.01-6.26-.01-9.39z" />
+                                    </svg>
+                                ),
+                                href: 'https://www.tiktok.com/@balahissarrestaurant?is_from_webapp=1&sender_device=pc',
+                                label: 'TikTok'
+                            }
+                        ].map((social) => (
+                            <a
+                                key={social.label}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-accent/30 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95"
+                                aria-label={social.label}
                             >
-                                {social}
-                            </span>
+                                {social.icon}
+                            </a>
                         ))}
                     </div>
                 </div>
@@ -85,20 +119,14 @@ export function Footer() {
                 </div>
 
                 <div>
-                    <h4 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-6 md:mb-8">Newsletter</h4>
-                    <p className="text-xs text-accent/50 mb-6 font-bold uppercase tracking-widest">
-                        Join our circle for seasonal updates
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                        <input
-                            id="newsletter-email"
-                            name="email"
-                            type="email"
-                            autoComplete="email"
-                            className="bg-secondary/40 border border-primary/20 rounded-lg p-3 text-xs flex-grow focus:outline-none focus:border-primary w-full"
-                            placeholder="EMAIL ADDRESS"
-                        />
-                        <button className="bg-primary text-dark p-3 rounded-lg text-xs font-black whitespace-nowrap active:scale-95 transition-transform">JOIN</button>
+                    <h4 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-6 md:mb-8">Visit Us</h4>
+                    <div className="text-xs text-accent/50 space-y-4 font-bold tracking-widest uppercase">
+                        <p className="leading-relaxed">
+                            {restaurantContent.contact.address}
+                        </p>
+                        <a href={`tel:${restaurantContent.contact.phone.replace(/\s/g, '')}`} className="block text-primary hover:text-white transition-colors">
+                            {restaurantContent.contact.phone}
+                        </a>
                     </div>
                 </div>
             </div>

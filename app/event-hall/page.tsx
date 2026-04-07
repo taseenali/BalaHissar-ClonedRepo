@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { restaurantContent } from '@/data/content';
+import QawaliSection from '@/components/event-hall/QawaliSection';
 
 export const metadata: Metadata = {
     title: 'Event Hall & Private Dining | Bala Hissar - Weddings, Parties, Corporate Events',
-    description: 'Host your special occasion at Bala Hissar\'s elegant event hall. Perfect for weddings, corporate functions, and private celebrations in West Wickham.',
+    description: 'Host your special occasion at Bala Hissar\'s elegant event hall. Perfect for weddings, corporate functions, and private celebrations in Bradford.',
     alternates: {
         canonical: 'https://mybalahissar.co.uk/event-hall',
     },
@@ -41,7 +43,7 @@ export default function EventHallPage() {
                         <span className="italic text-primary">Unforgettable Moments</span>
                     </h1>
                     <p className="text-lg md:text-xl text-white/90 font-light max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200">
-                        From intimate gatherings to grand celebrations, our hall sets the stage for memories that last a lifetime.
+                        From elegant weddings and nikkah ceremonies to vibrant mehndis, birthdays, corporate events, and musical nights — we create unforgettable experiences for every occasion.
                     </p>
                     <Link
                         href="/contact"
@@ -64,7 +66,7 @@ export default function EventHallPage() {
                             Nestled within Bala Hissar, our exclusive event hall offers a sophisticated backdrop for your most cherished occasions. Designed with versatility in mind, the space seamlessly adapts to your vision, whether you're planning a traditional wedding reception, a sleek corporate gala, or a warm family reunion.
                         </p>
                         <p className="text-accent/70 text-lg leading-relaxed">
-                            Our dedicated events team works closely with you to curate every detail, from bespoke menus featuring our signature Afghan cuisine to ambient lighting and décor arrangements.
+                            Our dedicated events team works intimately with you to curate every detail, ranging from bespoke menus infused with our celebrated Pakistani cuisine to sophisticated ambient lighting and décor.
                         </p>
                     </div>
                     <div className="relative aspect-[4/5] rounded-lg overflow-hidden border border-white/5 group">
@@ -100,7 +102,7 @@ export default function EventHallPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                 <h3 className="text-2xl font-serif text-white mb-2">Weddings & Receptions</h3>
-                                <p className="text-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                <p className="text-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 min-h-[3rem] md:min-h-[4rem]">
                                     Create a romantic atmosphere for your special day with flexible seating and exquisite catering.
                                 </p>
                             </div>
@@ -118,7 +120,7 @@ export default function EventHallPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                 <h3 className="text-2xl font-serif text-white mb-2">Corporate Events</h3>
-                                <p className="text-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                <p className="text-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 min-h-[3rem] md:min-h-[4rem]">
                                     Impress clients and colleagues with a professional yet inviting setting for meetings and dinners.
                                 </p>
                             </div>
@@ -136,7 +138,7 @@ export default function EventHallPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                             <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                 <h3 className="text-2xl font-serif text-white mb-2">Private Parties</h3>
-                                <p className="text-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                <p className="text-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 min-h-[3rem] md:min-h-[4rem]">
                                     Birthdays, anniversaries, or family reunions handled with care and exceptional service.
                                 </p>
                             </div>
@@ -144,6 +146,8 @@ export default function EventHallPage() {
                     </div>
                 </div>
             </section>
+
+            <QawaliSection />
 
             {/* Features / Capacity */}
             <section className="py-20 md:py-24 px-4 md:px-8 bg-[#161b1a]"> {/* Slightly lighter dark */}
@@ -156,12 +160,12 @@ export default function EventHallPage() {
                             <div className="space-y-4">
                                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl">👥</div>
                                 <h4 className="text-xl text-white font-serif">Capacity</h4>
-                                <p className="text-accent/60 text-sm">Comfortably seats up to 100 guests for dining, or 150 for standing receptions.</p>
+                                <p className="text-accent/60 text-sm">Our event hall comfortably accommodates up to 70 guests, while the full restaurant offers an expanded capacity of up to 140 guests for larger celebrations.</p>
                             </div>
                             <div className="space-y-4">
                                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl">🍽️</div>
                                 <h4 className="text-xl text-white font-serif">Catering</h4>
-                                <p className="text-accent/60 text-sm">Full access to our authentic Afghan & Persian menu, with bespoke buffet options available.</p>
+                                <p className="text-accent/60 text-sm">Exclusive access to our renowned Pakistani culinary offerings, tailored with bespoke buffet experiences.</p>
                             </div>
                             <div className="space-y-4">
                                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl">🔊</div>
@@ -182,11 +186,9 @@ export default function EventHallPage() {
                             Due to high demand, we recommend inquiring at least 2-4 weeks in advance for large events.
                         </p>
                         <div className="space-y-4">
-                            <a href="tel:+447000000000" className="block text-2xl text-primary font-serif hover:text-white transition-colors">
-                                +44 020 8XXX XXXX
-                            </a>
-                            <a href="mailto:events@balahissar.co.uk" className="block text-accent/60 hover:text-primary transition-colors uppercase tracking-widest text-sm">
-                                events@balahissar.co.uk
+                            <p className="text-accent/60 uppercase tracking-widest text-[10px] font-bold">Call to Discuss</p>
+                            <a href={`tel:${restaurantContent.contact.phone}`} className="block text-3xl md:text-4xl text-primary font-serif hover:text-white transition-all transform hover:scale-105">
+                                {restaurantContent.contact.phone}
                             </a>
                         </div>
                         <div className="mt-10 pt-10 border-t border-primary/10">

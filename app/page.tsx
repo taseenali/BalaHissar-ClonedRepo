@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { menuData, dineInMenuData } from '@/data/menu';
+import { dineInMenuData } from '@/data/menu';
 import { restaurantContent } from '@/data/content';
 import * as motion from 'framer-motion/client';
+import HeroSlider from '@/components/home/HeroSlider';
 
 // Explicit unique metadata for Home page
 export const metadata: Metadata = {
-    title: 'Bala Hissar | Authentic Afghan & Persian Restaurant in West Wickham',
-    description: 'Experience the finest authentic Afghan and Persian cuisine at Bala Hissar restaurant in West Wickham. Traditional dishes including Kabuli Palow, kebabs, buffet, and more.',
+    title: 'Bala Hissar | Premium Pakistani Restaurant in Bradford',
+    description: 'Experience authentic Pakistani cuisine at Bala Hissar in Bradford, renowned for its traditional charcoal-grilled kebabs, rich Kabuli Palow, and elegant dining atmosphere.',
     alternates: {
         canonical: 'https://mybalahissar.co.uk',
     },
     openGraph: {
-        title: 'Bala Hissar | Authentic Afghan & Persian Restaurant',
-        description: 'Experience the finest authentic Afghan and Persian cuisine in West Wickham.',
+        title: 'Bala Hissar | Premium Pakistani Restaurant',
+        description: 'Discover the rich culinary heritage of Pakistan with exceptional dining at Bala Hissar, Bradford.',
         url: 'https://mybalahissar.co.uk',
         siteName: 'Bala Hissar Restaurant',
         type: 'website',
@@ -26,18 +27,7 @@ export default function HomePage() {
         <main className="min-h-screen bg-dark">
             {/* Hero Section */}
             <section id="home" className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden scroll-mt-20">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/hero/home-hero.webp"
-                        alt=""
-                        fill
-                        priority
-                        sizes="100vw"
-                        className="object-cover opacity-50 scale-110"
-                        aria-hidden="true"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-transparent to-dark" />
-                </div>
+                <HeroSlider />
 
                 <div className="relative z-10 px-4 md:px-6 max-w-4xl">
                     <motion.div
@@ -105,7 +95,6 @@ export default function HomePage() {
                             height={400}
                             className="rounded-2xl shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] w-full"
                         />
-                        <div className="absolute -bottom-4 md:-bottom-6 -right-4 md:-right-6 w-32 md:w-48 h-32 md:h-48 border-4 border-primary rounded-2xl -z-10 hidden sm:block" />
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, x: 40 }}
@@ -117,10 +106,8 @@ export default function HomePage() {
                         <p className="text-4xl md:text-5xl font-serif mb-8 leading-snug italic">
                             Culinary Traditions from the Silk Road
                         </p>
-                        <p className="text-accent/70 text-lg leading-relaxed mb-6">
-                            {restaurantContent.shortAbout}
-                        </p>
                         <div className="prose prose-invert prose-lg max-w-none text-accent/70 leading-relaxed">
+                            <p className="mb-4">{restaurantContent.shortAbout}</p>
                             {restaurantContent.fullAbout.split('\n\n').map((para, i) => (
                                 <p key={i} className="mb-4">{para}</p>
                             ))}
@@ -142,7 +129,7 @@ export default function HomePage() {
                             Buffet Feast
                         </motion.h2>
                         <p className="text-accent/60 max-w-2xl mx-auto leading-relaxed">
-                            A royal spread of authentic Afghan & Persian delicacies. Choose your feast.
+                            An exquisite curation of traditional Pakistani delicacies. Indulge in culinary perfection.
                         </p>
                     </header>
 
@@ -186,12 +173,14 @@ export default function HomePage() {
                             <div>
                                 <h4 className="text-primary uppercase tracking-widest text-xs font-bold mb-4">Highlights</h4>
                                 <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-accent/80 font-serif">
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Kabuli Palow</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Lamb Chops</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Chapli Kebab</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Kabuli Pilau</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Peshawari Chapli Kebabs</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Murgh Boti</li>
                                     <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Chicken Karahi</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Mutton Masala</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Masala Fried Fish</li>
                                     <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Fresh Naan</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Ferni & Baklava</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Gulab Jamun</li>
                                 </ul>
                             </div>
                         </motion.div>
@@ -209,24 +198,29 @@ export default function HomePage() {
                             </div>
 
                             <h3 className="text-3xl font-serif text-white mb-2 italic underline underline-offset-8 decoration-white/10">Breakfast Buffet</h3>
-                            <p className="text-accent/60 mb-8 max-w-sm mt-4 italic">Start your weekend with a traditional Afghan breakfast feast. Hearty, warming, and delicious.</p>
+                            <p className="text-accent/60 mb-8 max-w-sm mt-4 italic">Awaken your senses with our traditional Pakistani weekend breakfast. A hearty, soul-warming spread crafted for perfect mornings.</p>
 
                             {/* Info Block */}
-                            <div className="bg-white/5 rounded-xl p-6 border border-white/5 mb-8 hover:bg-white/10 transition-colors">
+                            <div className="bg-white/5 rounded-xl p-6 border border-white/5 mb-10 hover:bg-white/10 transition-colors">
                                 <div className="text-center space-y-2">
                                     <p className="text-lg text-primary font-bold">Every Saturday & Sunday</p>
-                                    <p className="text-sm text-accent/70 uppercase tracking-widest">10:00 AM - 2:00 PM</p>
+                                    <p className="text-sm text-accent/70 uppercase tracking-widest">10:00 AM – 3:00 PM</p>
                                     <div className="w-12 h-px bg-primary/30 mx-auto my-4" />
                                     <div className="flex justify-center gap-8">
                                         <div>
-                                            <span className="block text-2xl font-bold text-white">£14.95</span>
+                                            <span className="block text-2xl font-bold text-white">£11.95</span>
                                             <span className="text-[10px] uppercase tracking-widest text-accent/50">Adults</span>
                                         </div>
                                         <div>
-                                            <span className="block text-2xl font-bold text-white">£7.95</span>
-                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Kids</span>
+                                            <span className="block text-2xl font-bold text-white">£6.95</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Age 4-8</span>
+                                        </div>
+                                        <div>
+                                            <span className="block text-2xl font-bold text-white">Free</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Under 3</span>
                                         </div>
                                     </div>
+                                    <p className="mt-4 italic text-accent font-medium tracking-wide text-xs">Pancakes available for kids</p>
                                 </div>
                             </div>
 
@@ -234,13 +228,14 @@ export default function HomePage() {
                             <div>
                                 <h4 className="text-white/80 uppercase tracking-widest text-xs font-bold mb-4">On The Menu</h4>
                                 <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-accent/80 font-serif">
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Paya & Nihari</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Keema Fry</li>
                                     <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Halwa Puri</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Nihari</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Paye (Trotters)</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Omelette Station</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Paratha & Naan</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Pink Tea (Kashmiri)</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Lahori Channa</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Chicken Wings</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Sheer Khurma</li>
                                 </ul>
+                                <p className="mt-6 text-[10px] text-accent/40 italic leading-tight text-center">Dishes may vary or be substituted based on seasonal availability</p>
                             </div>
                         </motion.div>
                     </div>
@@ -251,45 +246,7 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* Signature Specialties Section */}
-            <section className="py-24">
-                <div className="max-w-7xl mx-auto px-6 text-center">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-3xl font-serif mb-12 italic text-gradient-gold"
-                    >
-                        Signature Specialties
-                    </motion.h2>
-                    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                        {menuData[5]?.items.slice(0, 3).map((item, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="glass-panel p-6 md:p-8 rounded-2xl border border-primary/5 hover:border-primary/40 transition-all group relative overflow-hidden"
-                            >
-                                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                <div className="h-1 bg-primary/20 w-12 mx-auto mb-6 group-hover:w-20 transition-all relative z-10" />
-                                <h3 className="text-lg md:text-xl font-serif mb-2 relative z-10">{item.name}</h3>
-                                {item.description && <p className="text-accent/50 text-xs md:text-sm mb-6 line-clamp-2 italic relative z-10">{item.description}</p>}
-                                {item.price && <span className="text-primary font-bold relative z-10">£{item.price}</span>}
-                            </motion.div>
-                        ))}
-                    </div>
-                    <div className="mt-12">
-                        <Link
-                            href="/menu"
-                            className="text-primary font-black uppercase tracking-widest text-[10px] md:text-xs border border-primary/20 px-8 py-3 rounded-full hover:bg-primary hover:text-dark transition-all"
-                        >
-                            View Full Menu
-                        </Link>
-                    </div>
-                </div>
-            </section>
+
 
             {/* Gallery Section */}
             <section id="gallery" className="py-24 bg-secondary/20 scroll-mt-20 overflow-hidden">

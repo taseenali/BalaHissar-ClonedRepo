@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { smoothScrollTo } from '@/utils/scroll';
@@ -122,14 +123,26 @@ export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.4 }}
-                        className="px-6 pt-16 pb-3 border-b border-primary/10 shrink-0"
+                        className="px-6 pt-16 pb-4 border-b border-primary/10 shrink-0"
                     >
-                        <span className="text-xl font-serif text-primary tracking-widest">
-                            {restaurantContent.name.toUpperCase()}
-                        </span>
-                        <p className="text-accent/40 text-[10px] uppercase tracking-[0.3em] mt-1 font-bold">
-                            Authentic Afghan & Persian
-                        </p>
+                        <div className="flex items-center gap-3">
+                            <div className="relative h-12 w-12 overflow-hidden shrink-0">
+                                <Image
+                                    src="/images/logo.png"
+                                    alt="Bala Hissar Logo"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-xl font-serif text-primary tracking-widest leading-none mb-1">
+                                    {restaurantContent.name.toUpperCase()}
+                                </span>
+                                <p className="text-accent/40 text-[9px] uppercase tracking-[0.3em] font-black">
+                                    Refined Pakistani Cuisine
+                                </p>
+                            </div>
+                        </div>
                     </motion.div>
 
                     {/* ─── Navigation Links ─── */}

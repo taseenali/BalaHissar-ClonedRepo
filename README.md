@@ -7,7 +7,7 @@ This project is a high-performance, modern restaurant website and booking system
 
 - **/app**: Next.js App Router for all routes (public, admin) and API handlers.
 - **/components**: React components categorized by scope (UI, Layout, Booking, Admin).
-- **/lib**: Business logic including database access, email templates, and capacity algorithms.
+- **/lib**: Business logic including database access and capacity algorithms.
 - **/prisma**: Data models and migration configurations.
 - **/types**: Shared TypeScript interfaces to ensure type-safety across client/server.
 
@@ -47,4 +47,4 @@ This project is a high-performance, modern restaurant website and booking system
 
 ## Design Language
 - **Typography**: Playfair Display (Serif) for character, Plus Jakarta Sans (Sans) for clarity.
-- **Palette**: Deep Green (#1A2F2B) & Gold (#C5A059) inspired by traditional Persian/Afghan aesthetics.
+- **Palette**: Deep Navy (#0B1C2C) & Gold (#C5A059) inspired by traditional Pakistani aesthetics.

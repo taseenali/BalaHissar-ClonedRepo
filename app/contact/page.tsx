@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import { restaurantContent } from '@/data/content';
 import PrivacyMap from '@/components/PrivacyMap';
 import * as motion from 'framer-motion/client';
+import ContactForm from '@/components/contact/ContactForm';
 
 export const metadata: Metadata = {
     title: 'Contact Us | Bala Hissar - Location, Phone & Opening Hours',
-    description: 'Visit Bala Hissar at 108-110 High St, West Wickham BR4 0ND. Call 020 8777 2221 for reservations. Open Monday-Sunday evenings. View our location on the map.',
+    description: 'Visit Bala Hissar at 46-50 Highgate, Heaton, Bradford, BD9 4BE. Call 01274 780951 for reservations. Open Mon-Fri evenings and Sat-Sun all day (including breakfast). View our location on the map.',
     alternates: {
         canonical: 'https://mybalahissar.co.uk/contact',
     },
@@ -41,8 +42,8 @@ export default function ContactPage() {
                                 📍
                             </div>
                             <div>
-                                <h2 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-2">Location</h2>
-                                <p className="text-base md:text-lg text-accent/80 font-serif">{restaurantContent.contact.address}</p>
+                                <h2 className="text-primary uppercase tracking-[0.3em] text-[10px] font-serif font-black mb-2">Location</h2>
+                                <p className="text-base md:text-lg text-accent/80">{restaurantContent.contact.address}</p>
                             </div>
                         </motion.div>
 
@@ -56,9 +57,8 @@ export default function ContactPage() {
                                 📞
                             </div>
                             <div>
-                                <h2 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-2">Reservations & Enquiries</h2>
-                                <p className="text-base md:text-lg text-accent/80 font-serif">{restaurantContent.contact.phone}</p>
-                                <p className="text-xs text-accent/50 mt-1">{restaurantContent.contact.email}</p>
+                                <h2 className="text-primary uppercase tracking-[0.3em] text-[10px] font-serif font-black mb-2">Reservations & Enquiries</h2>
+                                <p className="text-base md:text-lg text-accent/80">{restaurantContent.contact.phone}</p>
                             </div>
                         </motion.div>
 
@@ -72,12 +72,12 @@ export default function ContactPage() {
                                 🕒
                             </div>
                             <div className="w-full">
-                                <h2 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-2">Opening Hours</h2>
+                                <h2 className="text-primary uppercase tracking-[0.3em] text-[10px] font-serif font-black mb-2">Opening Hours</h2>
                                 <div className="space-y-2 text-accent/70 text-sm w-full max-w-sm">
                                     {restaurantContent.openingHours.map((row, i) => (
                                         <div key={i} className="flex justify-between w-full border-b border-white/5 pb-2">
                                             <span className="font-bold">{row.days}</span>
-                                            <span className="text-primary whitespace-nowrap font-serif">{row.hours}</span>
+                                            <span className="text-primary whitespace-nowrap">{row.hours}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -90,14 +90,27 @@ export default function ContactPage() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="h-full min-h-[450px]"
+                    className="h-full min-h-[450px] flex flex-col gap-4"
                 >
-                    <PrivacyMap
-                        mapUrl={restaurantContent.contact.mapUrl}
-                        title="Bala Hissar Restaurant Location Map"
-                    />
+                    <div className="flex-1 w-full min-h-[400px]">
+                        <PrivacyMap
+                            mapUrl={restaurantContent.contact.mapUrl}
+                            title="Bala Hissar Restaurant Location Map"
+                        />
+                    </div>
+                    <a 
+                        href="https://maps.app.goo.gl/kVCtzfT98ZGztZgm6" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-full py-4 mt-2 rounded-xl border border-primary/30 text-primary text-center font-bold tracking-widest uppercase text-xs hover:bg-primary/10 transition-colors flex items-center justify-center gap-2"
+                    >
+                        <span>🗺️</span> Open in Google Maps
+                    </a>
                 </motion.div>
             </motion.div>
+
+            {/* Contact Form Section */}
+            <ContactForm />
         </section>
     );
 }

@@ -23,7 +23,7 @@ export interface MenuSection {
   note?: string;
 }
 
-// DINE-IN BUFFET MENU
+// DINE-IN BUFFET MENU (Starters, Main, Cold, Salad, Desserts)
 export const dineInMenuData: MenuSection = {
   title: "Dine-In Buffet Menu",
   subtitle: "Special Offer",
@@ -34,6 +34,19 @@ export const dineInMenuData: MenuSection = {
   },
   note: "Dishes may vary or be substituted to bring you the newest seasonal flavours",
   categories: [
+    {
+      category: "Starters",
+      items: [
+        { name: "Soup of the day", description: "", price: "" },
+        { name: "Murgh Boti", description: "", price: "" },
+        { name: "Peshawari Chapli Kebabs", description: "", price: "" },
+        { name: "BBQ Chicken Wings", description: "", price: "" },
+        { name: "Masala Fried Fish", description: "", price: "" },
+        { name: "Vegetable Pakoras", description: "", price: "", isVegetarian: true },
+        { name: "Chicken Spring Rolls", description: "", price: "" },
+        { name: "Chips", description: "", price: "" }
+      ]
+    },
     {
       category: "Main Course",
       items: [
@@ -58,19 +71,6 @@ export const dineInMenuData: MenuSection = {
       items: [
         { name: "Green Salad", description: "", price: "", isVegetarian: true },
         { name: "Russian Salad", description: "", price: "", isVegetarian: true }
-      ]
-    },
-    {
-      category: "Starters",
-      items: [
-        { name: "Soup of the Day", description: "", price: "" },
-        { name: "Murgh Boti", description: "", price: "" },
-        { name: "Peshawari Chapli Kebabs", description: "", price: "" },
-        { name: "BBQ Chicken Wings", description: "", price: "" },
-        { name: "Masala Fried Fish", description: "", price: "" },
-        { name: "Vegetable Pakoras", description: "", price: "", isVegetarian: true },
-        { name: "Chicken Spring Rolls", description: "", price: "" },
-        { name: "Chips", description: "", price: "" }
       ]
     },
     {
@@ -142,19 +142,13 @@ export const takeawayMenuData: MenuSection = {
         { name: "Gulab Jamun", description: "4 Pieces", price: "4.00" },
         { name: "Shahi Halwa", description: "", price: "4.00" }
       ]
-    },
-    {
-      category: "Drinks",
-      items: [
-        { name: "Ice Cola, Ice Extreme, Ice Lemon, Ice Blu", description: "", price: "2.00" }
-      ]
     }
   ]
 };
 
-// BREAKFAST MENU (Weekends)
+// BREAKFAST MENU (Renamed to A La Carte)
 export const breakfastMenuData: MenuSection = {
-  title: "Breakfast Menu",
+  title: "Breakfast A La Carte",
   categories: [
     {
       category: "Traditional Breakfast",
@@ -181,20 +175,79 @@ export const breakfastBuffetData: MenuSection = {
   title: "Breakfast Buffet",
   subtitle: "Unlimited Weekend Special",
   specialOffer: {
-    adults: "£14.95",
+    adults: "£11.95",
     kidsUnder3: "Free",
-    age4to8: "£7.95"
+    age4to8: "£6.95"
   },
   categories: [
     {
       category: "Buffet Selection",
       items: [
-        { name: "Unlimited Halwa Puri", description: "Freshly made on demand", price: "" },
-        { name: "Nihari & Paye", description: "Traditional stews", price: "" },
-        { name: "Chana Masala", description: "Spiced chickpeas", price: "", isVegetarian: true },
-        { name: "Omelette Station", description: "Made to order", price: "", isVegetarian: true },
-        { name: "Variety of Naans", description: "Plain, Butter, Garlic", price: "", isVegetarian: true },
-        { name: "Lassi & Tea", description: "Included in buffet price", price: "", isVegetarian: true }
+        { name: "Paya & Nihari", description: "Slow-cooked traditional stews", price: "" },
+        { name: "Keema Fry", description: "Spiced minced meat", price: "" },
+        { name: "Lahori Channa Anda", description: "Chickpeas with egg", price: "" },
+        { name: "Aloo Bhujia", description: "Spiced potato dish", price: "", isVegetarian: true },
+        { name: "Chicken Wings", description: "Spiced and grilled", price: "" },
+        { name: "Halwa & Sheer Khurma", description: "Traditional desserts", price: "", isVegetarian: true },
+        { name: "Salad Section", description: "Pickle Onion, Kachumar, and Pickles", price: "", isVegetarian: true },
+        { name: "Fresh Puri & Naan", description: "Included in buffet selection", price: "", isVegetarian: true },
+        { name: "Sauces & Condiments", description: "", price: "", isVegetarian: true }
+      ]
+    }
+  ]
+};
+
+// DRINKS MENU
+export const drinksMenuData: MenuSection = {
+  title: "Drinks Menu",
+  categories: [
+    {
+      category: "Lassi & Juice",
+      items: [
+        { name: "Fresh Orange Juice", description: "", price: "" },
+        { name: "Mango Lassi", description: "", price: "" },
+        { name: "Sweet Lassi", description: "", price: "" },
+        { name: "Salty Lassi", description: "", price: "" }
+      ]
+    },
+    {
+      category: "Mocktails",
+      items: [
+        { name: "Virgin Mojito", description: "Lemon, lime, fresh mint over crushed ice", price: "" },
+        { name: "Strawberry Mojito", description: "Bright, tangy, and delightfully sweet", price: "" },
+        { name: "Blue Lagoon", description: "Blue curaçao, mint, and lime soda", price: "" },
+        { name: "Passion Fruit Chilli", description: "Passion fruit, wild mint, lime & Thai chilli", price: "" },
+        { name: "Nimbo Paani", description: "Lemon drink with cane sugar and mint", price: "" }
+      ]
+    },
+    {
+      category: "Jug Selection",
+      items: [
+        { name: "Nimbo Paani Jug", description: "", price: "" },
+        { name: "Soft Drink Jugs", description: "Ice Cola, Extreme, Lemon, or Blu", price: "" },
+        { name: "Fresh Orange Juice Jug", description: "", price: "" },
+        { name: "Mango Lassi Jug", description: "", price: "" },
+        { name: "Lassi Jugs", description: "Sweet or Salty", price: "" }
+      ]
+    },
+    {
+      category: "Glass Bottles & Cans",
+      items: [
+        { name: "Soft Drink Bottles", description: "Ice Cola, Lemon, Xtreme, Blu, Irn Bru", price: "" },
+        { name: "J2O", description: "Raspberry, Apple & Mango, or Orange", price: "" },
+        { name: "Fruit Shoot", description: "Blackcurrant or Orange", price: "" },
+        { name: "Water", description: "Still or Sparkling", price: "" },
+        { name: "Soft Drink Cans", description: "Ice Cola, Extreme, Lemon, or Blu", price: "" }
+      ]
+    },
+    {
+      category: "Hot Drinks & Desserts",
+      items: [
+        { name: "Desi Chai", description: "", price: "" },
+        { name: "Pot of Desi Chai / Kava", description: "", price: "" },
+        { name: "Peshawari Kava", description: "", price: "" },
+        { name: "English Tea", description: "", price: "" },
+        { name: "Falooda", description: "Signature traditional dessert", price: "" }
       ]
     }
   ]

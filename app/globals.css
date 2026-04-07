@@ -3,9 +3,10 @@
 /* Custom theme variables for Tailwind CSS v4 */
 @theme {
     --color-primary: #C5A059;
-    --color-secondary: #1A2F2B;
-    --color-accent: #EBE3D5;
-    --color-dark: #0D1514;
+    --color-secondary: #12263A;
+    --color-accent: #F5F5F5;
+    --color-dark: #0B1C2C;
+    --color-muted: #CFCFCF;
 
     --font-family-serif: 'Playfair Display', serif;
     --font-family-sans: 'Plus Jakarta Sans', sans-serif;
@@ -42,12 +43,12 @@ html {
 }
 
 body {
-    background-color: #0D1514;
-    color: #EBE3D5;
+    background-color: #0B1C2C;
+    color: #F5F5F5;
     font-family: 'Plus Jakarta Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     scrollbar-width: thin;
-    scrollbar-color: #C5A059 #0D1514;
+    scrollbar-color: #C5A059 #0B1C2C;
 }
 
 .font-serif {
@@ -60,7 +61,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0D1514;
+    background: #0B1C2C;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -70,7 +71,7 @@ body {
 
 /* Premium UI Utilities */
 .glass-panel {
-    background: rgba(26, 47, 43, 0.4);
+    background: rgba(18, 38, 58, 0.4);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(197, 160, 89, 0.1);
@@ -103,8 +104,9 @@ body {
 }
 
 .text-gradient-gold {
-    background: linear-gradient(to right, #C5A059, #EBE3D5, #C5A059);
+    background: linear-gradient(to right, #C5A059, #F5F5F5, #C5A059);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% auto;
 }

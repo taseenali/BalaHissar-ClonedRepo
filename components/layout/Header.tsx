@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { restaurantContent } from '@/data/content';
 import { MobileMenu } from './MobileMenu';
@@ -56,9 +57,20 @@ export function Header() {
                 <Link
                     href="/#home"
                     onClick={(e) => handleScroll(e, '/#home', true)}
-                    className="text-xl md:text-2xl font-serif text-primary tracking-[0.3em] hover:text-white transition-all duration-500 whitespace-nowrap text-gradient-gold"
+                    className="flex items-center gap-2 md:gap-3 group transition-all duration-500"
                 >
-                    {restaurantContent.name.toUpperCase()}
+                    <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden shrink-0">
+                        <Image
+                            src="/images/logo.png"
+                            alt="Bala Hissar Logo"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
+                    </div>
+                    <span className="text-xl md:text-2xl font-serif text-primary tracking-[0.3em] group-hover:text-white transition-all duration-500 whitespace-nowrap text-gradient-gold">
+                        {restaurantContent.name.toUpperCase()}
+                    </span>
                 </Link>
 
                 <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8 text-[11px] uppercase tracking-[0.3em] font-black">
