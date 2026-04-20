@@ -89,6 +89,14 @@ export function Footer() {
                             </a>
                         ))}
                     </div>
+                    <div className="mt-10 md:mt-12">
+                        <Link 
+                            href="/book-table" 
+                            className="inline-block bg-primary text-dark px-8 py-4 rounded-full font-black uppercase tracking-[0.2em] text-[11px] hover:bg-white transition-all transform hover:-translate-y-0.5 shadow-[0_0_20px_rgba(197,160,89,0.2)] shimmer"
+                        >
+                            Book a Table
+                        </Link>
+                    </div>
                 </div>
 
                 <div>
@@ -128,6 +136,13 @@ export function Footer() {
                             {restaurantContent.contact.phone}
                         </a>
                         <div className="mt-4 w-full h-32 rounded-lg border border-primary/20 overflow-hidden relative group">
+                            <a 
+                                href="https://maps.app.goo.gl/kSczkxd8dgJQjv9B9" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="absolute inset-0 z-10 md:hidden"
+                                aria-label="Open in Google Maps"
+                            />
                             <iframe
                                 src={restaurantContent.contact.mapUrl}
                                 width="100%"
@@ -135,7 +150,7 @@ export function Footer() {
                                 style={{ border: 0 }}
                                 loading="lazy"
                                 title="Bala Hissar Location"
-                                className="grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none group-hover:pointer-events-auto"
+                                className="grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none md:group-hover:pointer-events-auto"
                             />
                         </div>
                     </div>
