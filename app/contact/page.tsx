@@ -77,7 +77,11 @@ export default function ContactPage() {
                                     {restaurantContent.openingHours.map((row, i) => (
                                         <div key={i} className="flex justify-between w-full border-b border-white/5 pb-2">
                                             <span className="font-bold">{row.days}</span>
-                                            <span className="text-primary whitespace-nowrap">{row.hours}</span>
+                                            <div className="flex flex-col text-right gap-1">
+                                                {row.hours.split('\n').map((time, j) => (
+                                                    <span key={j} className="text-primary whitespace-nowrap">{time}</span>
+                                                ))}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

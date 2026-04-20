@@ -194,6 +194,22 @@ export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
                         </ul>
                     </nav>
 
+                    {/* ─── Book a Table CTA ─── */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4, duration: 0.4 }}
+                        className="px-6 py-3 shrink-0"
+                    >
+                        <Link
+                            href="/book-table"
+                            onClick={() => setIsOpen(false)}
+                            className="block w-full text-center bg-primary text-dark py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[11px] hover:bg-white transition-all shimmer shadow-[0_0_15px_rgba(197,160,89,0.15)]"
+                        >
+                            Book a Table
+                        </Link>
+                    </motion.div>
+
                     {/* ─── Contact Info Footer ─── */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import {
     takeawayMenuData,
     dineInMenuData,
-    breakfastMenuData,
     breakfastBuffetData,
     drinksMenuData,
     type MenuCategory
@@ -28,7 +27,21 @@ export default function MenuPage() {
 
             <div className="space-y-0">
 
-                {/* 1. Breakfast Buffet */}
+                {/* 1. Dinner Buffet */}
+                <MenuSection
+                    title="Dinner Buffet"
+                    timing="Available: 5:30 PM – 10:00 PM"
+                    description="A royal spread of starters, mains, grills, and desserts."
+                    categories={dineInMenuData.categories}
+                    isBuffet
+                    priceInfo={{
+                        adults: dineInMenuData.specialOffer?.adults || "",
+                        kids: dineInMenuData.specialOffer?.age4to8 || ""
+                    }}
+                    bgVariant="medium"
+                />
+
+                {/* 2. Breakfast Buffet */}
                 <MenuSection
                     title="Breakfast Buffet"
                     timing="Available: 10:00 AM – 3:00 PM (Weekends)"
@@ -44,40 +57,17 @@ export default function MenuPage() {
                     footerNote="Dishes may vary or be substituted to bring you the newest seasonal flavours."
                 />
 
-                {/* 2. Breakfast A La Carte */}
-                <MenuSection
-                    title="Breakfast A La Carte"
-                    timing="Available: 10:00 AM – 3:00 PM (Sat & Sun)"
-                    description="Start your day with our hearty traditional breakfast dishes."
-                    categories={breakfastMenuData.categories}
-                    bgVariant="light"
-                />
-
-                {/* 3. Dinner Buffet */}
-                <MenuSection
-                    title="Dinner Buffet"
-                    timing="Available: 5:30 PM – 10:00 PM"
-                    description="A royal spread of starters, mains, grills, and desserts."
-                    categories={dineInMenuData.categories}
-                    isBuffet
-                    priceInfo={{
-                        adults: dineInMenuData.specialOffer?.adults || "",
-                        kids: dineInMenuData.specialOffer?.age4to8 || ""
-                    }}
-                    bgVariant="medium"
-                />
-
-                {/* 4. Drinks Menu */}
+                {/* 3. Drinks Menu */}
                 <MenuSection
                     title="Drinks Menu"
                     timing="Refreshing & Traditional"
                     description="From our signature lassis and mocktails to traditional Kashmiri chai."
                     categories={drinksMenuData.categories}
-                    bgVariant="dark"
+                    bgVariant="light"
                     footerNote="Please note that beverages are not included in buffet packages."
                 />
 
-                {/* 5. Takeaway Menu */}
+                {/* 4. Takeaway Menu */}
                 <MenuSection
                     title="Takeaway Menu"
                     timing="Available: 5:30 PM – 10:00 PM"

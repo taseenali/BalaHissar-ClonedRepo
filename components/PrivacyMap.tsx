@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface PrivacyMapProps {
@@ -23,13 +22,7 @@ export default function PrivacyMap({ mapUrl, title }: PrivacyMapProps) {
                         exit={{ opacity: 0 }}
                         className="absolute inset-0 z-10 flex flex-col items-center justify-center p-8 text-center"
                     >
-                        <Image
-                            src="/images/map-placeholder.png"
-                            alt="Map Placeholder"
-                            fill
-                            className="object-cover opacity-40 grayscale group-hover:scale-110 transition-transform duration-1000"
-                        />
-                        <div className="absolute inset-0 bg-dark/60 backdrop-blur-sm" />
+                        <div className="absolute inset-0 bg-secondary/20" />
 
                         <div className="relative z-20">
                             <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center text-primary text-3xl mb-6 mx-auto border border-primary/30 animate-pulse">

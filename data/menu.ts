@@ -146,29 +146,7 @@ export const takeawayMenuData: MenuSection = {
   ]
 };
 
-// BREAKFAST MENU (Renamed to A La Carte)
-export const breakfastMenuData: MenuSection = {
-  title: "Breakfast A La Carte",
-  categories: [
-    {
-      category: "Traditional Breakfast",
-      items: [
-        { name: "Halwa Puri Thali", description: "Semolina pudding served with fried bread and chickpea curry", price: "8.95" },
-        { name: "Nihari", description: "Slow-cooked lamb stew served with naan", price: "9.95" },
-        { name: "Paye", description: "Traditional trotters curry cooked with aromatic spices", price: "9.95" },
-        { name: "Afghan Omelette", description: "Eggs cooked with tomatoes, onions, chillies and coriander", price: "7.50", isVegetarian: true }
-      ]
-    },
-    {
-      category: "Sides & Drinks",
-      items: [
-        { name: "Tandoori Paratha", description: "Freshly baked layered flatbread", price: "2.50", isVegetarian: true },
-        { name: "Pink Tea (Kashmiri Chai)", description: "Traditional creamy tea with nuts", price: "3.50", isVegetarian: true },
-        { name: "Masala Chai", description: "Spiced tea", price: "2.95", isVegetarian: true }
-      ]
-    }
-  ]
-};
+
 
 // BREAKFAST BUFFET
 export const breakfastBuffetData: MenuSection = {

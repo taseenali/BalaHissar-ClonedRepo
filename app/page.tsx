@@ -258,7 +258,7 @@ export default function HomePage() {
                         <h3 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-8 border-l-4 border-primary pl-4">
                             Our Cuisine
                         </h3>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
                             {restaurantContent.galleryCategories.food.map((img, i) => (
                                 <motion.div
                                     key={i}
@@ -266,17 +266,23 @@ export default function HomePage() {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="aspect-square overflow-hidden rounded-lg group relative border border-white/5"
+                                    className="aspect-square md:aspect-square overflow-hidden rounded-2xl md:rounded-lg group relative border border-white/10 md:border-white/5 shadow-2xl shadow-black/40 md:shadow-none"
                                 >
                                     <Image
                                         src={img.url}
                                         alt={img.title}
-                                        width={300}
-                                        height={300}
-                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        width={600}
+                                        height={600}
+                                        className="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                    {/* Desktop Hover Overlay */}
+                                    <div className="hidden md:flex absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity items-center justify-center backdrop-blur-[2px]">
                                         <span className="text-white text-xs uppercase tracking-[0.2em] font-black border border-white/20 px-4 py-2 rounded-lg">{img.title}</span>
+                                    </div>
+
+                                    {/* Mobile Permanent Overlay (Bottom) */}
+                                    <div className="md:hidden absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent pt-16 pb-5 px-5">
+                                        <span className="text-white text-sm md:text-base uppercase tracking-[0.2em] font-black block text-left drop-shadow-lg">{img.title}</span>
                                     </div>
                                 </motion.div>
                             ))}

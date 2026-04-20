@@ -127,6 +127,17 @@ export function Footer() {
                         <a href={`tel:${restaurantContent.contact.phone.replace(/\s/g, '')}`} className="block text-primary hover:text-white transition-colors">
                             {restaurantContent.contact.phone}
                         </a>
+                        <div className="mt-4 w-full h-32 rounded-lg border border-primary/20 overflow-hidden relative group">
+                            <iframe
+                                src={restaurantContent.contact.mapUrl}
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                loading="lazy"
+                                title="Bala Hissar Location"
+                                className="grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none group-hover:pointer-events-auto"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

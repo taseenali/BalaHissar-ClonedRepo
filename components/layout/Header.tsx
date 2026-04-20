@@ -100,6 +100,16 @@ export function Header() {
                     })}
                 </div>
 
+                {/* Book a Table CTA - Desktop */}
+                <div className="hidden lg:block">
+                    <Link
+                        href="/book-table"
+                        className="bg-primary text-dark px-6 py-2.5 rounded-full font-black uppercase tracking-[0.15em] text-[10px] hover:bg-white transition-all transform hover:-translate-y-0.5 shadow-[0_0_15px_rgba(197,160,89,0.15)] shimmer"
+                    >
+                        Book a Table
+                    </Link>
+                </div>
+
                 {/* Mobile Menu Toggle */}
                 <MobileMenu navItems={navItems} />
             </nav>
