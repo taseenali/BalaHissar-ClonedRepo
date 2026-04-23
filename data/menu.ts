@@ -43,8 +43,8 @@ export const dineInMenuData: MenuSection = {
         { name: "BBQ Chicken Wings", description: "", price: "" },
         { name: "Masala Fried Fish", description: "", price: "" },
         { name: "Vegetable Pakoras", description: "", price: "", isVegetarian: true },
-        { name: "Chicken Spring Rolls", description: "", price: "" },
-        { name: "Chips", description: "", price: "" }
+        { name: "Spring Rolls", description: "", price: "", isVegetarian: true },
+        { name: "Chips", description: "", price: "", isVegetarian: true }
       ]
     },
     {
@@ -70,7 +70,8 @@ export const dineInMenuData: MenuSection = {
       category: "Salad Section",
       items: [
         { name: "Green Salad", description: "", price: "", isVegetarian: true },
-        { name: "Russian Salad", description: "", price: "", isVegetarian: true }
+        { name: "Russian Salad", description: "", price: "", isVegetarian: true },
+        { name: "Pasta", description: "", price: "", isVegetarian: true }
       ]
     },
     {
@@ -161,14 +162,16 @@ export const breakfastBuffetData: MenuSection = {
     {
       category: "Buffet Selection",
       items: [
-        { name: "Paya & Nihari", description: "Slow-cooked traditional stews", price: "" },
+        { name: "Paya", description: "Slow-cooked traditional stew", price: "" },
+        { name: "Nihari", description: "Slow-cooked traditional stew", price: "" },
         { name: "Keema Fry", description: "Spiced minced meat", price: "" },
         { name: "Lahori Channa Anda", description: "Chickpeas with egg", price: "" },
         { name: "Aloo Bhujia", description: "Spiced potato dish", price: "", isVegetarian: true },
         { name: "Chicken Wings", description: "Spiced and grilled", price: "" },
-        { name: "Halwa & Sheer Khurma", description: "Traditional desserts", price: "", isVegetarian: true },
+        { name: "Halwa and Puri", description: "Traditional sweet halwa served with fluffy puris", price: "", isVegetarian: true },
+        { name: "Sheer Khurma", description: "Traditional vermicelli dessert", price: "", isVegetarian: true },
         { name: "Salad Section", description: "Pickle Onion, Kachumar, and Pickles", price: "", isVegetarian: true },
-        { name: "Fresh Puri & Naan", description: "Included in buffet selection", price: "", isVegetarian: true },
+        { name: "Fresh Naan", description: "Included in buffet selection", price: "", isVegetarian: true },
         { name: "Sauces & Condiments", description: "", price: "", isVegetarian: true }
       ]
     }
@@ -224,8 +227,7 @@ export const drinksMenuData: MenuSection = {
         { name: "Desi Chai", description: "", price: "" },
         { name: "Pot of Desi Chai / Kava", description: "", price: "" },
         { name: "Peshawari Kava", description: "", price: "" },
-        { name: "English Tea", description: "", price: "" },
-        { name: "Falooda", description: "Signature traditional dessert", price: "" }
+        { name: "English Tea", description: "", price: "" }
       ]
     }
   ]

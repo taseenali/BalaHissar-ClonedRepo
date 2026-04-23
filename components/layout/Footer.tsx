@@ -11,6 +11,8 @@ const navItems = [
     { label: 'Buffet', href: '/#buffet', isAnchor: true },
     { label: 'Gallery', href: '/#gallery', isAnchor: true },
     { label: 'Menu', href: '/menu', isAnchor: false },
+    { label: 'Order Online', href: '/order-online', isAnchor: false },
+    { label: 'Catering', href: '/catering', isAnchor: false },
     { label: 'Event Hall', href: '/event-hall', isAnchor: false },
     { label: 'Contact', href: '/contact', isAnchor: false },
 ];
@@ -43,13 +45,13 @@ export function Footer() {
                         {restaurantContent.name.toUpperCase()}
                     </h3>
                     <p className="text-accent/50 max-w-md leading-loose mb-10 text-sm md:text-base italic">
-                        "Elevating the rich culinary traditions of Pakistan in the heart of Bradford. A haven of exceptional heritage and flavor."
+                        &quot;Elevating the rich culinary traditions of Pakistan in the heart of Bradford. A haven of exceptional heritage and flavor.&quot;
                     </p>
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4">
                         {[
                             { 
                                 icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                                     </svg>
                                 ), 
@@ -58,7 +60,7 @@ export function Footer() {
                             },
                             { 
                                 icon: (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                                         <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -69,25 +71,42 @@ export function Footer() {
                             },
                             { 
                                 icon: (
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                                         <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.33-.85.51-1.44 1.43-1.58 2.41-.14 1.01.23 2.06.94 2.81 1.24 1.23 3.29 1.34 4.67.24.61-.45.92-1.17.91-1.93-.02-3.13-.01-6.26-.01-9.39z" />
                                     </svg>
                                 ),
-                                href: 'https://www.tiktok.com/@balahissarrestaurant?is_from_webapp=1&sender_device=pc',
-                                label: 'TikTok'
+                                label: 'TikTok',
+                                href: 'https://www.tiktok.com/@balahissarrestaurant?is_from_webapp=1&sender_device=pc'
+                            },
+                        ].map((social) => {
+                            const className = "w-10 h-10 flex items-center justify-center rounded-lg bg-secondary/10 border border-primary/10 text-accent/30 hover:text-primary hover:border-primary/40 hover:bg-secondary/20 transition-all duration-300 hover:scale-110 active:scale-95 group";
+                            
+                            if (social.isInternal) {
+                                return (
+                                    <Link
+                                        key={social.label}
+                                        href={social.href}
+                                        className={className}
+                                        aria-label={social.label}
+                                    >
+                                        {social.icon}
+                                    </Link>
+                                );
                             }
-                        ].map((social) => (
-                            <a
-                                key={social.label}
-                                href={social.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-accent/30 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95"
-                                aria-label={social.label}
-                            >
-                                {social.icon}
-                            </a>
-                        ))}
+
+                            return (
+                                <a
+                                    key={social.label}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={className}
+                                    aria-label={social.label}
+                                >
+                                    {social.icon}
+                                </a>
+                            );
+                        })}
                     </div>
                     <div className="mt-10 md:mt-12">
                         <Link 
@@ -152,6 +171,26 @@ export function Footer() {
                                 title="Bala Hissar Location"
                                 className="grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none md:group-hover:pointer-events-auto"
                             />
+                        </div>
+                        <div className="mt-8 space-y-4">
+                            <h5 className="text-[9px] text-primary font-black uppercase tracking-[0.3em] border-l-2 border-primary/30 pl-3">Timings</h5>
+                            <div className="space-y-4">
+                                {restaurantContent.openingHours?.map((item, idx) => (
+                                    <div key={idx} className="group/time">
+                                        <span className="block text-accent/80 font-serif italic text-sm group-hover/time:text-primary transition-colors duration-300">
+                                            {item.title}
+                                        </span>
+                                        <div className="flex flex-col gap-0.5 mt-1">
+                                            <span className="text-[9px] text-accent/40 uppercase tracking-widest font-bold">
+                                                {item.days}
+                                            </span>
+                                            <span className="text-[10px] text-primary/60 font-black tracking-wider">
+                                                {item.hours}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

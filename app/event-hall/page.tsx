@@ -63,7 +63,7 @@ export default function EventHallPage() {
                         </h2>
                         <div className="w-20 h-1 bg-primary/30" />
                         <p className="text-accent/70 text-lg leading-relaxed">
-                            Nestled within Bala Hissar, our exclusive event hall offers a sophisticated backdrop for your most cherished occasions. Designed with versatility in mind, the space seamlessly adapts to your vision, whether you're planning a traditional wedding reception, a sleek corporate gala, or a warm family reunion.
+                            Our venue is designed to be the perfect backdrop for your most cherished moments. Whether you&apos;re planning an intimate family gathering or a large-scale celebration, our team handles every detail with precision and care, ensuring your event is exactly as you envisioned.
                         </p>
                         <p className="text-accent/70 text-lg leading-relaxed">
                             Our dedicated events team works intimately with you to curate every detail, ranging from bespoke menus infused with our celebrated Pakistani cuisine to sophisticated ambient lighting and décor.

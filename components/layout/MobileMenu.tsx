@@ -14,10 +14,12 @@ interface NavItem {
     label: string;
     href: string;
     isAnchor?: boolean;
+    children?: { label: string; href: string }[];
 }
 
 export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [expandedItem, setExpandedItem] = useState<string | null>(null);
     const [isMounted, setIsMounted] = useState(false);
     const pathname = usePathname();
     const activeSection = useScrollSpy(['home', 'about', 'buffet', 'gallery', 'footer']);
@@ -146,13 +148,16 @@ export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
                     </motion.div>
 
                     {/* ─── Navigation Links ─── */}
-                    <nav className="flex-1 min-h-0 flex flex-col justify-center px-6 py-2">
-                        <ul className="space-y-0">
+                    <nav className="flex-1 min-h-0 flex flex-col justify-center px-6 py-2 overflow-y-auto">
+                        <ul className="space-y-1">
                             {navItems.map((item, i) => {
                                 const active = isItemActive(item);
+                                const hasChildren = !!item.children;
+                                const isExpanded = expandedItem === item.label;
+
                                 return (
                                     <motion.li
-                                        key={item.href}
+                                        key={item.label}
                                         initial={{ opacity: 0, x: 40 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{
@@ -162,32 +167,83 @@ export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
                                             stiffness: 180,
                                         }}
                                     >
-                                        <Link
-                                            ref={i === 0 ? firstLinkRef : undefined}
-                                            href={item.href}
-                                            onClick={(e) => handleNavClick(e, item.href, !!item.isAnchor)}
-                                            className={`group flex items-center gap-3 py-2.5 px-4 rounded-xl transition-all duration-300 ${active
-                                                ? 'bg-primary/10 text-primary'
-                                                : 'text-white/80 hover:bg-white/5 hover:text-white active:bg-white/10'
-                                                }`}
-                                        >
-                                            <span className={`w-2 h-2 rounded-full shrink-0 transition-all duration-300 ${active
-                                                ? 'bg-primary shadow-[0_0_8px_rgba(197,160,89,0.6)]'
-                                                : 'bg-white/15 group-hover:bg-white/30'
-                                                }`} />
-                                            <span className="text-lg font-serif tracking-wide">
-                                                {item.label}
-                                            </span>
-                                            {active && (
-                                                <motion.span
-                                                    initial={{ opacity: 0, x: -5 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    className="ml-auto text-primary/60 text-base"
+                                        {hasChildren ? (
+                                            <div className="flex flex-col">
+                                                <button
+                                                    onClick={() => setExpandedItem(isExpanded ? null : item.label)}
+                                                    className={`group flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-300 ${isExpanded
+                                                        ? 'bg-primary/10 text-primary'
+                                                        : 'text-white/80 hover:bg-white/5 hover:text-white'
+                                                        }`}
                                                 >
-                                                    ›
-                                                </motion.span>
-                                            )}
-                                        </Link>
+                                                    <span className={`w-2 h-2 rounded-full shrink-0 transition-all duration-300 ${isExpanded ? 'bg-primary' : 'bg-white/15'}`} />
+                                                    <span className="text-lg font-serif tracking-wide">{item.label}</span>
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="18"
+                                                        height="18"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        className={`ml-auto transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                                                    >
+                                                        <path d="m6 9 6 6 6-6" />
+                                                    </svg>
+                                                </button>
+                                                <AnimatePresence>
+                                                    {isExpanded && (
+                                                        <motion.ul
+                                                            initial={{ height: 0, opacity: 0 }}
+                                                            animate={{ height: 'auto', opacity: 1 }}
+                                                            exit={{ height: 0, opacity: 0 }}
+                                                            className="overflow-hidden bg-white/5 rounded-xl mt-1 mx-2"
+                                                        >
+                                                            {item.children?.map((child) => (
+                                                                <li key={child.href}>
+                                                                    <Link
+                                                                        href={child.href}
+                                                                        onClick={() => setIsOpen(false)}
+                                                                        className="block py-3 px-10 text-white/60 hover:text-primary transition-colors text-base font-serif"
+                                                                    >
+                                                                        {child.label}
+                                                                    </Link>
+                                                                </li>
+                                                            ))}
+                                                        </motion.ul>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
+                                        ) : (
+                                            <Link
+                                                ref={i === 0 ? firstLinkRef : undefined}
+                                                href={item.href}
+                                                onClick={(e) => handleNavClick(e, item.href, !!item.isAnchor)}
+                                                className={`group flex items-center gap-3 py-2.5 px-4 rounded-xl transition-all duration-300 ${active
+                                                    ? 'bg-primary/10 text-primary'
+                                                    : 'text-white/80 hover:bg-white/5 hover:text-white active:bg-white/10'
+                                                    }`}
+                                            >
+                                                <span className={`w-2 h-2 rounded-full shrink-0 transition-all duration-300 ${active
+                                                    ? 'bg-primary shadow-[0_0_8px_rgba(197,160,89,0.6)]'
+                                                    : 'bg-white/15 group-hover:bg-white/30'
+                                                    }`} />
+                                                <span className="text-lg font-serif tracking-wide">
+                                                    {item.label}
+                                                </span>
+                                                {active && (
+                                                    <motion.span
+                                                        initial={{ opacity: 0, x: -5 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        className="ml-auto text-primary/60 text-base"
+                                                    >
+                                                        ›
+                                                    </motion.span>
+                                                )}
+                                            </Link>
+                                        )}
                                     </motion.li>
                                 );
                             })}

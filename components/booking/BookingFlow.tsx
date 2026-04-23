@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Calendar, Clock, Users, MessageSquare, Check, ArrowLeft, ArrowRight, Sparkles, Minus, Plus, User, Loader2 } from 'lucide-react';
 
 // ──────────────────────────────────────────────
@@ -30,12 +31,21 @@ function getSlotsForDate(dateStr: string): { label: string; slots: string[] }[] 
 
     if (isWeekend) {
         return [
-            { label: 'Morning – 10:00 AM to 3:00 PM', slots: generateTimeSlots(10, 0, 14, 45) },
-            { label: 'Evening – 5:30 PM to 10:00 PM', slots: generateTimeSlots(17, 30, 21, 45) },
+            { 
+                label: 'Breakfast Buffet – 10:00 AM to 2:00 PM', 
+                slots: generateTimeSlots(10, 0, 14, 0) 
+            },
+            { 
+                label: 'Dinner Buffet – Specific Slots', 
+                slots: ['5:30 PM', '7:00 PM', '8:30 PM'] 
+            },
         ];
     }
     return [
-        { label: 'Evening – 5:30 PM to 10:00 PM', slots: generateTimeSlots(17, 30, 21, 45) },
+        { 
+            label: 'Dinner Buffet – 5:30 PM to 8:30 PM', 
+            slots: generateTimeSlots(17, 30, 20, 30) 
+        },
     ];
 }
 
@@ -50,7 +60,6 @@ const STEPS = [
     { id: 'date', icon: Calendar, label: 'Date' },
     { id: 'time', icon: Clock, label: 'Time' },
     { id: 'guests', icon: Users, label: 'Guests' },
-    { id: 'notes', icon: MessageSquare, label: 'Notes' },
     { id: 'contact', icon: User, label: 'Contact' },
     { id: 'confirm', icon: Check, label: 'Confirm' },
 ] as const;
@@ -117,11 +126,11 @@ export default function BookingFlow() {
             case 1: return selectedDate !== '';
             case 2: return selectedTime !== '';
             case 3: return selectedGuests > 0;
-            case 4: return true; // Notes are optional
-            case 5: // Contact Details
+            case 4: // Contact Details
                 const isValidPhone = phone.startsWith('44') && phone.length >= 11;
-                return name.trim() !== '' && isValidPhone;
-            case 6: return true; // Confirm
+                const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                return name.trim() !== '' && isValidPhone && isValidEmail;
+            case 5: return true; // Confirm
             default: return false;
         }
     };
@@ -173,7 +182,7 @@ export default function BookingFlow() {
             }
 
             setIsSubmitted(true);
-        } catch (error) {
+        } catch {
             setSubmitError('Something went wrong. Please try again or contact us directly.');
         } finally {
             setIsSubmitting(false);
@@ -196,9 +205,14 @@ export default function BookingFlow() {
                 <p className="text-accent/60 text-base md:text-lg leading-relaxed max-w-md mx-auto mb-4">
                     Thank you, {name}. We have received your reservation request.
                 </p>
-                <p className="text-accent/50 text-sm leading-relaxed max-w-sm mx-auto mb-10">
+                <p className="text-accent/50 text-sm leading-relaxed max-w-sm mx-auto mb-4">
                     You will receive a call shortly on your phone to confirm your booking. We look forward to welcoming you.
                 </p>
+                <div className="bg-primary/5 border border-primary/15 rounded-xl p-4 max-w-sm mx-auto mb-10">
+                    <p className="text-primary/80 text-[11px] leading-relaxed italic">
+                        Please note: Your booking is for 1 hour 20 minutes. The table will be held for a maximum of 10 minutes.
+                    </p>
+                </div>
                 <div className="space-y-3">
                     <Link
                         href="/"
@@ -262,9 +276,16 @@ export default function BookingFlow() {
                                     initial={{ scale: 0.8, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
                                     transition={{ delay: 0.1, duration: 0.5 }}
-                                    className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-8 border border-primary/20 shadow-[0_0_30px_rgba(197,160,89,0.15)]"
+                                    className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center p-1 mx-auto mb-8 border border-primary/20 shadow-[0_0_30px_rgba(197,160,89,0.15)]"
                                 >
-                                    <Sparkles className="w-8 h-8" />
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src="/images/logo.png"
+                                            alt="Bala Hissar Logo"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
                                 </motion.div>
                                 <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 italic">
                                     Reserve Your Table
@@ -398,28 +419,10 @@ export default function BookingFlow() {
                             </div>
                         )}
 
-                        {/* ─── STEP 4: Notes ─── */}
-                        {currentStep === 4 && (
-                            <div className="text-center">
-                                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6 border border-primary/20">
-                                    <MessageSquare className="w-6 h-6" />
-                                </div>
-                                <h2 className="text-3xl md:text-4xl font-serif text-white mb-3 italic">Special Requests</h2>
-                                <p className="text-accent/50 text-sm mb-10">Any dietary needs or preferences? <span className="italic">(Optional)</span></p>
-                                <div className="max-w-md mx-auto">
-                                    <textarea
-                                        value={notes}
-                                        onChange={(e) => setNotes(e.target.value)}
-                                        rows={4}
-                                        placeholder="E.g. window seat, birthday celebration, dietary requirements..."
-                                        className="w-full bg-secondary/30 border border-primary/15 rounded-2xl px-6 py-5 text-sm text-white focus:outline-none focus:border-primary/50 transition-all placeholder:text-white/15 resize-none"
-                                    />
-                                </div>
-                            </div>
-                        )}
 
-                        {/* ─── STEP 5: Contact Details ─── */}
-                        {currentStep === 5 && (
+
+                        {/* ─── STEP 4: Contact Details ─── */}
+                        {currentStep === 4 && (
                             <div className="text-center w-full">
                                 <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6 border border-primary/20">
                                     <User className="w-6 h-6" />
@@ -453,7 +456,7 @@ export default function BookingFlow() {
                                     <div className="text-left w-full mx-auto max-w-[280px] sm:max-w-[320px]">
                                         <input
                                             type="email"
-                                            placeholder="Email Address (Optional)"
+                                            placeholder="Email Address *"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             className="w-full px-4 py-3 rounded-lg bg-transparent border border-accent/30 text-white placeholder:text-white/30 focus:outline-none focus:border-primary transition-all"
@@ -463,8 +466,8 @@ export default function BookingFlow() {
                             </div>
                         )}
 
-                        {/* ─── STEP 6: Confirmation ─── */}
-                        {currentStep === 6 && (
+                        {/* ─── STEP 5: Confirmation ─── */}
+                        {currentStep === 5 && (
                             <div className="text-center">
                                 <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6 border border-primary/20">
                                     <Check className="w-6 h-6" />
@@ -492,14 +495,6 @@ export default function BookingFlow() {
                                         </span>
                                         <span className="text-white text-sm font-medium">{selectedGuests}</span>
                                     </div>
-                                    {notes && (
-                                        <div className="pt-1">
-                                            <span className="text-accent/40 text-[10px] uppercase tracking-[0.3em] font-black flex items-center gap-2 mb-2">
-                                                <MessageSquare className="w-3.5 h-3.5" /> Notes
-                                            </span>
-                                            <p className="text-white/60 text-sm italic">&ldquo;{notes}&rdquo;</p>
-                                        </div>
-                                    )}
                                 </div>
 
                                 {submitError && (

@@ -3,25 +3,40 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { restaurantContent } from '@/data/content';
 import { MobileMenu } from './MobileMenu';
 import { smoothScrollTo } from '@/utils/scroll';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-const navItems = [
+interface NavItem {
+    label: string;
+    href: string;
+    isAnchor?: boolean;
+    children?: { label: string; href: string }[];
+}
+
+const navItems: NavItem[] = [
     { label: 'About', href: '/#about', isAnchor: true },
     { label: 'Buffet', href: '/#buffet', isAnchor: true },
     { label: 'Gallery', href: '/#gallery', isAnchor: true },
     { label: 'Menu', href: '/menu', isAnchor: false },
-    { label: 'Events', href: '/event-hall', isAnchor: false },
+    { label: 'Order Online', href: '/order-online', isAnchor: false },
     { label: 'Contact', href: '/contact', isAnchor: false },
+    { 
+        label: 'Events', 
+        href: '#', 
+        isAnchor: false,
+        children: [
+            { label: 'Event Hall', href: '/event-hall' },
+            { label: 'External Catering', href: '/catering' }
+        ]
+    },
 ];
 
 export function Header() {
     const pathname = usePathname();
-    const router = useRouter();
     const activeSection = useScrollSpy(['home', 'about', 'buffet', 'gallery', 'footer']);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -73,18 +88,44 @@ export function Header() {
                     </span>
                 </Link>
 
-                <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8 text-[11px] uppercase tracking-[0.3em] font-black">
+                <div className="hidden lg:flex flex-1 justify-center gap-6 text-[11px] uppercase tracking-[0.3em] font-black mx-10">
                     {navItems.map((item) => {
-                        const targetId = item.href.replace('/#', '');
                         const isActive = item.isAnchor
-                            ? pathname === '/' && activeSection === targetId
+                            ? pathname === '/' && activeSection === item.href.replace('/#', '')
                             : pathname === item.href;
+
+                        if (item.children) {
+                            return (
+                                <div key={item.label} className="relative group py-2">
+                                    <button className="flex items-center gap-1.5 transition-all duration-500 text-accent/60 group-hover:text-primary cursor-default uppercase tracking-[0.3em] font-black">
+                                        {item.label}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-500 group-hover:rotate-180">
+                                            <path d="m6 9 6 6 6-6" />
+                                        </svg>
+                                    </button>
+
+                                    <div className="absolute top-full right-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 z-50">
+                                        <div className="bg-dark/95 backdrop-blur-2xl border border-primary/20 rounded-2xl p-2 min-w-[200px] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                                            {item.children.map((child) => (
+                                                <Link
+                                                    key={child.href}
+                                                    href={child.href}
+                                                    className="block px-6 py-3.5 rounded-xl text-accent/60 hover:text-white hover:bg-primary/10 transition-all duration-300 whitespace-nowrap"
+                                                >
+                                                    {child.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        }
 
                         return (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                onClick={(e) => handleScroll(e, item.href, item.isAnchor)}
+                                onClick={(e) => handleScroll(e, item.href, !!item.isAnchor)}
                                 className={`transition-all duration-500 relative py-2 ${isActive ? 'text-white' : 'text-accent/60 hover:text-primary'
                                     }`}
                             >
@@ -104,7 +145,7 @@ export function Header() {
                 <div className="hidden lg:block">
                     <Link
                         href="/book-table"
-                        className="bg-primary text-dark px-6 py-2.5 rounded-full font-black uppercase tracking-[0.15em] text-[10px] hover:bg-white transition-all transform hover:-translate-y-0.5 shadow-[0_0_15px_rgba(197,160,89,0.15)] shimmer"
+                        className="bg-primary text-dark px-6 py-2.5 rounded-full font-black uppercase tracking-[0.15em] text-[10px] hover:bg-white transition-all shadow-[0_0_15px_rgba(197,160,89,0.15)]"
                     >
                         Book a Table
                     </Link>

@@ -12,14 +12,15 @@ Guided by time-honored techniques, our culinary artisans use authentic charcoal 
     mapUrl: "https://maps.google.com/maps?q=Bala%20Hissar%20Restaurant,%2046-50%20Highgate,%20Bradford&t=&z=15&ie=UTF8&iwloc=&output=embed"
   },
   openingHours: [
-    { days: "Monday - Friday", hours: "5:30 PM – 10:00 PM" },
-    { days: "Saturday - Sunday", hours: "10:00 AM – 3:00 PM\n5:30 PM – 10:00 PM" }
+    { title: "Dinner Buffet", days: "Monday - Sunday", hours: "5:30 PM – 10:00 PM" },
+    { title: "Breakfast Buffet", days: "Saturday - Sunday", hours: "10:00 AM – 3:00 PM" },
+    { title: "Event Hall", days: "Booking Only", hours: "Custom Timings" }
   ],
   galleryCategories: {
     food: [
       { url: "/images/gallery/food/murgh-boti.webp", title: "Murgh Boti" },
       { url: "/images/gallery/food/qabili-palaw.webp", title: "Kabuli Palow" },
-      { url: "/images/gallery/food/chapli-kebab.webp", title: "Mixed Grill" },
+      { url: "/images/gallery/food/chapli-kebab.webp", title: "Chapli Kebab" },
       { url: "/images/gallery/food/nihari.webp", title: "Nihari" },
       { url: "/images/gallery/food/masala-fried-fish.webp", title: "Masala Fried Fish" },
       { url: "/images/gallery/food/bbq-chicken-wings.webp", title: "BBQ Chicken Wings" },

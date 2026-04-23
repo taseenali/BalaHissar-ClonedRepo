@@ -52,7 +52,7 @@ export default function HomePage() {
                             transition={{ duration: 1, delay: 0.8 }}
                             className="text-xl md:text-2xl text-accent/80 mb-12 max-w-3xl mx-auto leading-relaxed font-light italic"
                         >
-                            "{restaurantContent.tagline}"
+                            &quot;{restaurantContent.tagline}&quot;
                         </motion.p>
 
                         <motion.div
@@ -67,12 +67,12 @@ export default function HomePage() {
                             >
                                 View The Menu
                             </Link>
-                            <a
-                                href="/#about"
+                            <Link
+                                href="/book-table"
                                 className="border border-primary/40 text-primary px-8 md:px-12 py-4 md:py-5 rounded-full font-black uppercase tracking-widest hover:bg-primary/10 transition-all text-xs md:text-base glass-panel backdrop-blur-md"
                             >
-                                Our Story
-                            </a>
+                                Book a Table
+                            </Link>
                         </motion.div>
                     </motion.div>
                 </div>
@@ -149,24 +149,23 @@ export default function HomePage() {
                             <p className="text-accent/60 mb-8 max-w-sm mt-4 italic">The complete Bala Hissar experience. Unlimited access to our finest grills, curries, and desserts.</p>
 
                             {/* Offer Block */}
-                            <div className="bg-dark/50 rounded-xl p-6 border border-primary/10 mb-8 backdrop-blur-sm relative overflow-hidden group-hover:border-primary/40 transition-colors">
-                                <div className="flex flex-wrap justify-center gap-8 text-accent">
-                                    <div className="text-center">
-                                        <span className="block text-3xl font-bold text-primary">{dineInMenuData.specialOffer?.adults}</span>
-                                        <span className="text-[10px] uppercase tracking-widest text-accent/50">Adults</span>
-                                    </div>
-                                    <div className="text-center">
-                                        <span className="block text-3xl font-bold text-green-400">{dineInMenuData.specialOffer?.kidsUnder3}</span>
-                                        <span className="text-[10px] uppercase tracking-widest text-accent/50">Under 3</span>
-                                    </div>
-                                    <div className="text-center">
-                                        <span className="block text-3xl font-bold text-primary">{dineInMenuData.specialOffer?.age4to8}</span>
-                                        <span className="text-[10px] uppercase tracking-widest text-accent/50">Age 4-8</span>
+                            <div className="bg-dark/50 rounded-xl p-6 border border-primary/10 mb-10 backdrop-blur-sm relative overflow-hidden group-hover:border-primary/40 transition-colors">
+                                <div className="text-center space-y-2">
+                                    <div className="flex justify-center gap-8">
+                                        <div>
+                                            <span className="block text-2xl font-bold text-primary">{dineInMenuData.specialOffer?.adults}</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Adults</span>
+                                        </div>
+                                        <div>
+                                            <span className="block text-2xl font-bold text-primary">{dineInMenuData.specialOffer?.age4to8}</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Age 4-8</span>
+                                        </div>
+                                        <div>
+                                            <span className="block text-2xl font-bold text-green-400">{dineInMenuData.specialOffer?.kidsUnder3}</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Under 3</span>
+                                        </div>
                                     </div>
                                 </div>
-                                {dineInMenuData.note && (
-                                    <p className="text-accent/40 text-[10px] italic mt-4 text-center">{dineInMenuData.note}</p>
-                                )}
                             </div>
 
                             {/* Menu Preview */}
@@ -182,6 +181,10 @@ export default function HomePage() {
                                     <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Fresh Naan</li>
                                     <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Gulab Jamun</li>
                                 </ul>
+                                <p className="mt-8 text-xs text-accent/60 italic text-center">...and many more items</p>
+                                {dineInMenuData.note && (
+                                    <p className="mt-2 text-[10px] text-accent/40 italic leading-tight text-center">{dineInMenuData.note}</p>
+                                )}
                             </div>
                         </motion.div>
 
@@ -191,51 +194,53 @@ export default function HomePage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="bg-gradient-to-br from-[#1a1510] to-[#0D1514] rounded-3xl p-6 md:p-8 border border-white/5 relative overflow-hidden group"
+                            className="bg-gradient-to-br from-[#1E3A5F] to-[#0F2032] rounded-3xl p-6 md:p-8 border border-blue-400/10 relative overflow-hidden group shadow-xl"
                         >
                             <div className="absolute top-0 right-0 bg-white/10 text-white text-[10px] font-black px-4 py-2 rounded-bl-xl uppercase tracking-widest backdrop-blur-md">
                                 Weekends Only
                             </div>
 
                             <h3 className="text-3xl font-serif text-white mb-2 italic underline underline-offset-8 decoration-white/10">Breakfast Buffet</h3>
-                            <p className="text-accent/60 mb-8 max-w-sm mt-4 italic">Awaken your senses with our traditional Pakistani weekend breakfast. A hearty, soul-warming spread crafted for perfect mornings.</p>
+                            <p className="text-accent/70 mb-8 max-w-sm mt-4 italic">Awaken your senses with our traditional Pakistani weekend breakfast. A hearty, soul-warming spread crafted for perfect mornings.</p>
 
                             {/* Info Block */}
                             <div className="bg-white/5 rounded-xl p-6 border border-white/5 mb-10 hover:bg-white/10 transition-colors">
                                 <div className="text-center space-y-2">
                                     <p className="text-lg text-primary font-bold">Every Saturday & Sunday</p>
-                                    <p className="text-sm text-accent/70 uppercase tracking-widest">10:00 AM – 3:00 PM</p>
+                                    <p className="text-sm text-accent/80 uppercase tracking-widest">10:00 AM – 3:00 PM</p>
                                     <div className="w-12 h-px bg-primary/30 mx-auto my-4" />
                                     <div className="flex justify-center gap-8">
                                         <div>
                                             <span className="block text-2xl font-bold text-white">£11.95</span>
-                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Adults</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/60">Adults</span>
                                         </div>
                                         <div>
                                             <span className="block text-2xl font-bold text-white">£6.95</span>
-                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Age 4-8</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/60">Age 4-8</span>
                                         </div>
                                         <div>
                                             <span className="block text-2xl font-bold text-white">Free</span>
-                                            <span className="text-[10px] uppercase tracking-widest text-accent/50">Under 3</span>
+                                            <span className="text-[10px] uppercase tracking-widest text-accent/60">Under 3</span>
                                         </div>
                                     </div>
-                                    <p className="mt-4 italic text-accent font-medium tracking-wide text-xs">Pancakes available for kids</p>
+                                    <p className="mt-4 italic text-accent/80 font-medium tracking-wide text-xs">Pancakes available for kids</p>
                                 </div>
                             </div>
 
                             {/* Menu Preview */}
                             <div>
-                                <h4 className="text-white/80 uppercase tracking-widest text-xs font-bold mb-4">On The Menu</h4>
+                                <h4 className="text-white/90 uppercase tracking-widest text-xs font-bold mb-4">On The Menu</h4>
                                 <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-accent/80 font-serif">
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Paya & Nihari</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Keema Fry</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Halwa Puri</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Lahori Channa</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Chicken Wings</li>
-                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-white/50 rounded-full" /> Sheer Khurma</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Paya</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Nihari</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Keema Fry</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Halwa Puri</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Lahori Channa</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Chicken Wings</li>
+                                    <li className="flex items-center gap-2 transition-transform hover:translate-x-1"><span className="w-1 h-1 bg-primary rounded-full" /> Sheer Khurma</li>
                                 </ul>
-                                <p className="mt-6 text-[10px] text-accent/40 italic leading-tight text-center">Dishes may vary or be substituted based on seasonal availability</p>
+                                <p className="mt-8 text-xs text-accent/60 italic text-center">...and many more items</p>
+                                <p className="mt-2 text-[10px] text-accent/50 italic leading-tight text-center">Dishes may vary or be substituted based on seasonal availability</p>
                             </div>
                         </motion.div>
                     </div>
@@ -316,6 +321,41 @@ export default function HomePage() {
                                     </div>
                                 </motion.div>
                             ))}
+                        </div>
+                    </div>
+
+                    {/* Events Highlight */}
+                    <div className="mt-24">
+                        <h3 className="text-primary uppercase tracking-[0.3em] text-[10px] font-black mb-8 border-l-4 border-primary pl-4">
+                            Events & Celebrations
+                        </h3>
+                        <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden group border border-white/5 shadow-2xl">
+                            <Image 
+                                src="/images/event-hall/banqueting-hall.webp"
+                                alt="Event Hall"
+                                fill
+                                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent flex flex-col justify-end p-8 md:p-12">
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8 }}
+                                    className="max-w-2xl"
+                                >
+                                    <h4 className="text-3xl md:text-5xl font-serif text-white mb-4 italic">Host Your Special Moments</h4>
+                                    <p className="text-accent/80 text-sm md:text-lg mb-8 leading-relaxed">
+                                        Whether you&apos;re planning a wedding, a corporate event, or an intimate gathering, Bala Hissar&apos;s catering service brings the authentic flavors of Peshawar to your table. Our premium event hall provides the perfect backdrop for your celebrations.
+                                    </p>
+                                    <Link 
+                                        href="/event-hall"
+                                        className="inline-block bg-primary text-dark px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 shadow-xl text-sm md:text-base shimmer"
+                                    >
+                                        Explore our Venue
+                                    </Link>
+                                </motion.div>
+                            </div>
                         </div>
                     </div>
                 </div>

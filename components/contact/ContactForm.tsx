@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import * as motion from 'framer-motion/client';
+import { motion } from 'framer-motion';
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -43,7 +43,7 @@ export default function ContactForm() {
                 </div>
                 <h2 className="text-3xl font-serif text-gradient-gold mb-4 italic">Thank You!</h2>
                 <p className="text-accent/70 max-w-sm mx-auto leading-relaxed text-sm">
-                    We have received your enquiry. Our events team will contact you shortly on <span className="text-primary font-bold">{formData.phone}</span> to discuss your celebration.
+                    We have received your enquiry. Our team will contact you shortly on <span className="text-primary font-bold">{formData.phone}</span> to discuss your request.
                 </p>
                 <button 
                     onClick={() => setIsSent(false)}
@@ -57,6 +57,7 @@ export default function ContactForm() {
 
     return (
         <motion.div 
+            id="enquiry"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -64,8 +65,8 @@ export default function ContactForm() {
         >
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-10 md:mb-14">
-                    <h2 className="text-3xl md:text-4xl font-serif text-white mb-4 italic text-gradient-gold inline-block">Send an Enquiry</h2>
-                    <p className="text-accent/40 text-[10px] uppercase tracking-[0.4em] font-black mt-2">Plan your perfect event with us</p>
+                    <h2 className="text-3xl md:text-4xl font-serif text-white mb-4 italic text-gradient-gold inline-block">Get in Touch</h2>
+                    <p className="text-accent/40 text-[10px] uppercase tracking-[0.4em] font-black mt-2">We would love to hear from you</p>
                     <div className="w-12 h-[1px] bg-primary/30 mx-auto mt-8" />
                 </div>
 
@@ -98,7 +99,7 @@ export default function ContactForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="eventType" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Event Type *</label>
+                        <label htmlFor="eventType" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Enquiry Type *</label>
                         <div className="relative">
                             <select
                                 required
@@ -106,13 +107,13 @@ export default function ContactForm() {
                                 name="eventType"
                                 value={formData.eventType}
                                 onChange={handleChange}
-                                className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all appearance-none cursor-pointer"
+                                className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all appearance-none cursor-pointer uppercase"
                             >
-                                <option value="" disabled className="bg-dark text-white/30">SELECT OCCASION</option>
+                                <option value="" disabled className="bg-dark text-white/30">SELECT TYPE</option>
+                                <option value="General Enquiry" className="bg-dark">GENERAL ENQUIRY</option>
+                                <option value="External Catering" className="bg-dark">EXTERNAL CATERING</option>
+                                <option value="Event Hall" className="bg-dark">EVENT HALL BOOKING</option>
                                 <option value="Wedding" className="bg-dark">WEDDING</option>
-                                <option value="Nikkah" className="bg-dark">NIKKAH</option>
-                                <option value="Mehndi" className="bg-dark">MEHNDI</option>
-                                <option value="Birthday" className="bg-dark">BIRTHDAY</option>
                                 <option value="Corporate" className="bg-dark">CORPORATE EVENT</option>
                                 <option value="Other" className="bg-dark">OTHER</option>
                             </select>
