@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Calendar, Clock, Users, MessageSquare, Check, ArrowLeft, ArrowRight, Sparkles, Minus, Plus, User, Loader2 } from 'lucide-react';
+import { Calendar, Clock, Users, Check, ArrowLeft, ArrowRight, Sparkles, Minus, Plus, User, Loader2 } from 'lucide-react';
 
 // ──────────────────────────────────────────────
 // Time Slot Generator
@@ -99,7 +99,6 @@ export default function BookingFlow() {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [selectedGuests, setSelectedGuests] = useState(1);
-    const [notes, setNotes] = useState('');
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
@@ -173,7 +172,6 @@ export default function BookingFlow() {
                     date: formatDisplayDate(selectedDate),
                     time: selectedTime,
                     guests: selectedGuests,
-                    notes
                 }),
             });
 
