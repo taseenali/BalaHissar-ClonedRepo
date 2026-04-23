@@ -7,6 +7,31 @@ import Image from 'next/image';
 import { Calendar, Clock, Users, Check, ArrowLeft, ArrowRight, Sparkles, Minus, Plus, User, Loader2 } from 'lucide-react';
 
 // ──────────────────────────────────────────────
+// Timezone Helper (Bradford, UK)
+// ──────────────────────────────────────────────
+function getBradfordInfo() {
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/London',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+    });
+    
+    const parts = formatter.formatToParts(now);
+    const getPart = (type: string) => parts.find(p => p.type === type)?.value || '0';
+    
+    // Format: YYYY-MM-DD
+    const dateStr = `${getPart('year')}-${getPart('month').toString().padStart(2, '0')}-${getPart('day').toString().padStart(2, '0')}`;
+    const hour = parseInt(getPart('hour'));
+    
+    return { dateStr, hour };
+}
+
+// ──────────────────────────────────────────────
 // Time Slot Generator
 // ──────────────────────────────────────────────
 function generateTimeSlots(startHour: number, startMin: number, endHour: number, endMin: number, interval = 15): string[] {
@@ -28,25 +53,44 @@ function getSlotsForDate(dateStr: string): { label: string; slots: string[] }[] 
     const date = new Date(dateStr + 'T12:00:00');
     const day = date.getDay(); // 0=Sun, 6=Sat
     const isWeekend = day === 0 || day === 6;
+    
+    const { dateStr: todayStr, hour: currentHour } = getBradfordInfo();
+    const isToday = dateStr === todayStr;
 
     if (isWeekend) {
-        return [
-            { 
+        const sections = [];
+        
+        // Breakfast Buffet: NEVER same day
+        if (!isToday) {
+            sections.push({ 
                 label: 'Breakfast Buffet – 10:00 AM to 2:00 PM', 
                 slots: generateTimeSlots(10, 0, 14, 0) 
-            },
-            { 
+            });
+        }
+        
+        // Dinner Buffet: Same day only before 4 PM (16:00)
+        if (!isToday || currentHour < 16) {
+            sections.push({ 
                 label: 'Dinner Buffet – Specific Slots', 
                 slots: ['5:30 PM', '7:00 PM', '8:30 PM'] 
-            },
-        ];
+            });
+        }
+        
+        return sections;
     }
-    return [
-        { 
+    
+    // Weekdays
+    const sections = [];
+    
+    // Dinner Buffet: Same day only before 4 PM (16:00)
+    if (!isToday || currentHour < 16) {
+        sections.push({ 
             label: 'Dinner Buffet – 5:30 PM to 8:30 PM', 
             slots: generateTimeSlots(17, 30, 20, 30) 
-        },
-    ];
+        });
+    }
+    
+    return sections;
 }
 
 // Simulated fully-booked slots
@@ -107,7 +151,13 @@ export default function BookingFlow() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
 
-    const today = new Date().toISOString().split('T')[0];
+    const { dateStr: today, hour: currentHour } = getBradfordInfo();
+    const tomorrow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }));
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+
+    // If it's after 4 PM, the earliest booking possible is tomorrow
+    const minDate = currentHour >= 16 ? tomorrowStr : today;
 
     const goNext = useCallback(() => {
         setDirection(1);
@@ -170,6 +220,7 @@ export default function BookingFlow() {
                     phone,
                     email,
                     date: formatDisplayDate(selectedDate),
+                    rawDate: selectedDate,
                     time: selectedTime,
                     guests: selectedGuests,
                 }),
@@ -288,9 +339,27 @@ export default function BookingFlow() {
                                 <h1 className="text-4xl md:text-5xl font-serif text-white mb-4 italic">
                                     Reserve Your Table
                                 </h1>
-                                <p className="text-accent/50 text-base md:text-lg max-w-md mx-auto leading-relaxed mb-12">
+                                <p className="text-accent/50 text-base md:text-lg max-w-md mx-auto leading-relaxed mb-10">
                                     Experience the finest Pakistani dining in Bradford. Secure your spot in just a few steps.
                                 </p>
+
+                                {/* Booking Rules Notices */}
+                                <div className="max-w-md mx-auto mb-12 space-y-3">
+                                    <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 flex items-start gap-3 text-left">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                                        <p className="text-accent/60 text-xs leading-relaxed">
+                                            <span className="text-primary/90 font-bold uppercase tracking-wider block mb-1">Dinner Buffet</span>
+                                            Same-day bookings are only available before 4:00 PM.
+                                        </p>
+                                    </div>
+                                    <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 flex items-start gap-3 text-left">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                                        <p className="text-accent/60 text-xs leading-relaxed">
+                                            <span className="text-primary/90 font-bold uppercase tracking-wider block mb-1">Breakfast Buffet</span>
+                                            Bookings must be made at least one day in advance.
+                                        </p>
+                                    </div>
+                                </div>
                                 <button
                                     onClick={goNext}
                                     className="bg-primary text-dark px-12 py-5 rounded-full font-black uppercase tracking-[0.2em] text-[11px] hover:bg-white transition-all transform hover:-translate-y-0.5 shimmer shadow-[0_0_20px_rgba(197,160,89,0.2)]"
@@ -311,7 +380,7 @@ export default function BookingFlow() {
                                 <div className="max-w-xs mx-auto">
                                     <input
                                         type="date"
-                                        min={today}
+                                        min={minDate}
                                         value={selectedDate}
                                         onChange={(e) => { setSelectedDate(e.target.value); setSelectedTime(''); }}
                                         className="w-full bg-secondary/30 border border-primary/15 rounded-2xl px-6 py-5 text-base text-white focus:outline-none focus:border-primary/50 transition-all [color-scheme:dark] text-center font-medium tracking-wide cursor-pointer hover:border-primary/30"
