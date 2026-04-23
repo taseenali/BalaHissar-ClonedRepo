@@ -78,35 +78,18 @@ export function Footer() {
                                 label: 'TikTok',
                                 href: 'https://www.tiktok.com/@balahissarrestaurant?is_from_webapp=1&sender_device=pc'
                             },
-                        ].map((social) => {
-                            const className = "w-10 h-10 flex items-center justify-center rounded-lg bg-secondary/10 border border-primary/10 text-accent/30 hover:text-primary hover:border-primary/40 hover:bg-secondary/20 transition-all duration-300 hover:scale-110 active:scale-95 group";
-                            
-                            if (social.isInternal) {
-                                return (
-                                    <Link
-                                        key={social.label}
-                                        href={social.href}
-                                        className={className}
-                                        aria-label={social.label}
-                                    >
-                                        {social.icon}
-                                    </Link>
-                                );
-                            }
-
-                            return (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={className}
-                                    aria-label={social.label}
-                                >
-                                    {social.icon}
-                                </a>
-                            );
-                        })}
+                        ].map((social) => (
+                            <a
+                                key={social.label}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 flex items-center justify-center rounded-lg bg-secondary/10 border border-primary/10 text-accent/30 hover:text-primary hover:border-primary/40 hover:bg-secondary/20 transition-all duration-300 hover:scale-110 active:scale-95 group"
+                                aria-label={social.label}
+                            >
+                                {social.icon}
+                            </a>
+                        ))}
                     </div>
                     <div className="mt-10 md:mt-12">
                         <Link 
