@@ -335,6 +335,7 @@ export default function HomePage() {
                                 src="/images/event-hall/banqueting-hall.webp"
                                 alt="Event Hall"
                                 fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
                                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent flex flex-col justify-end p-8 md:p-12">

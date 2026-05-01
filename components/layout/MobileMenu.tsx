@@ -133,6 +133,7 @@ export function MobileMenu({ navItems }: { navItems: NavItem[] }) {
                                     src="/images/logo.png"
                                     alt="Bala Hissar Logo"
                                     fill
+                                    sizes="48px"
                                     className="object-contain"
                                 />
                             </div>

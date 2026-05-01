@@ -342,6 +342,7 @@ export default function BookingFlow() {
                                             src="/images/logo.png"
                                             alt="Bala Hissar Logo"
                                             fill
+                                            sizes="96px"
                                             className="object-contain"
                                         />
                                     </div>

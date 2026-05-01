@@ -90,9 +90,11 @@ body {
     will-change: transform;
 }
 
-/* Pause ONLY when a card itself is hovered, not the gaps */
-.animate-marquee:has(.review-card:hover) {
-    animation-play-state: paused;
+/* Pause ONLY when a card itself is hovered, not the gaps (Desktop only) */
+@media (hover: hover) {
+    .animate-marquee:has(.review-card:hover) {
+        animation-play-state: paused;
+    }
 }
 
 .perspective-1000 {

@@ -79,6 +79,7 @@ export function Header() {
                             src="/images/logo.png"
                             alt="Bala Hissar Logo"
                             fill
+                            sizes="(max-width: 768px) 32px, 40px"
                             className="object-contain"
                             priority
                         />

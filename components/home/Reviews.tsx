@@ -24,37 +24,27 @@ const StarRating = ({ rating, size = 12, activeColor = "#C5A059" }: { rating: nu
 
 const ReviewCard = ({ review }: { review: Review }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  
-  // Motion values for 3D tilt and shine
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [15, -15]), { stiffness: 300, damping: 30 });
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-15, 15]), { stiffness: 300, damping: 30 });
-  
-  // Shine position
   const shineX = useSpring(mouseX, { stiffness: 100, damping: 20 });
   const shineY = useSpring(mouseY, { stiffness: 100, damping: 20 });
 
   function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    
     const width = rect.width;
     const height = rect.height;
-    
     const mouseXPos = event.clientX - rect.left;
     const mouseYPos = event.clientY - rect.top;
-    
     const xPct = mouseXPos / width - 0.5;
     const yPct = mouseYPos / height - 0.5;
-    
     x.set(xPct);
     y.set(yPct);
-    
     mouseX.set(mouseXPos);
     mouseY.set(mouseYPos);
   }
@@ -76,15 +66,10 @@ const ReviewCard = ({ review }: { review: Review }) => {
           transformStyle: "preserve-3d",
         }}
         whileHover={{ scale: 1.02 }}
-        className="relative group h-full cursor-pointer"
+        className="relative group h-full cursor-pointer touch-none"
       >
-        {/* Blue Glow Background */}
         <div className="absolute -inset-[2px] bg-gradient-to-br from-blue-500/20 via-primary/20 to-blue-600/20 rounded-2xl blur-[4px] opacity-20 group-hover:opacity-100 transition-opacity duration-700" />
-        
-        {/* Main Card Body (Blueish Tint & High Transparency) */}
         <div className="relative h-full overflow-hidden rounded-2xl p-8 bg-secondary/15 backdrop-blur-[24px] border border-blue-400/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 group-hover:border-blue-400/30 group-hover:shadow-[0_20px_80px_rgba(59,130,246,0.15)]">
-          
-          {/* Dynamic Shine Layer (Blueish) */}
           <motion.div 
             className="absolute inset-0 z-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
             style={{
@@ -94,17 +79,11 @@ const ReviewCard = ({ review }: { review: Review }) => {
               )
             }}
           />
-
           {/* Frosted Glass Texture Overlay */}
-          <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-soft-light bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-          
-          {/* Top blue highlight edge */}
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-overlay bg-white/5" />
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent" />
-
-          {/* Content Wrapper */}
           <div className="relative z-10 flex flex-col h-full translate-z-20">
             <Quote className="absolute top-0 right-0 text-blue-400/10 w-12 h-12 rotate-180 transition-transform group-hover:scale-110" />
-            
             <div className="flex justify-between items-start mb-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400/20 to-blue-900/40 border border-blue-400/20 flex items-center justify-center text-primary font-bold shadow-inner">
@@ -122,13 +101,11 @@ const ReviewCard = ({ review }: { review: Review }) => {
                 <span className="text-[10px] text-blue-200/20 font-medium">{review.time}</span>
               </div>
             </div>
-
             <div className="flex-grow mb-6">
               <p className="text-blue-50/70 text-sm leading-relaxed italic line-clamp-2 h-10 font-light tracking-wide">
                 &quot;{review.text}&quot;
               </p>
             </div>
-
             {review.categories && (
               <div className="space-y-3 py-4 border-y border-blue-400/5 mb-6">
                 {['Food', 'Service', 'Atmosphere'].map((cat) => (
@@ -139,7 +116,6 @@ const ReviewCard = ({ review }: { review: Review }) => {
                 ))}
               </div>
             )}
-
             <div className="flex items-center justify-between mt-auto">
               <div className="flex items-center gap-2 text-blue-400/30 group-hover:text-blue-400/50 transition-colors">
                 <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
@@ -158,12 +134,13 @@ const ReviewCard = ({ review }: { review: Review }) => {
 
 export default function Reviews() {
   const [mounted, setMounted] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const marqueeReviews = [...reviews, ...reviews];
+  const marqueeReviews = [...reviews, ...reviews, ...reviews]; // Triple for smoother infinite look
 
   if (!mounted) {
     return (
@@ -198,15 +175,28 @@ export default function Reviews() {
         </header>
       </div>
 
-      {/* Advanced Marquee Container */}
-      <div className="relative flex overflow-hidden py-12 group/marquee">
-        <div className="animate-marquee">
+      {/* Marquee Container with separate Drag and Animation logic */}
+      <div 
+        className="relative flex overflow-hidden py-12 group/marquee select-none cursor-grab active:cursor-grabbing"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+      >
+        <motion.div 
+          className={`flex flex-nowrap animate-marquee ${isPaused ? '[animation-play-state:paused]' : ''}`}
+          // We apply the drag to the moving container, but we use dragConstraints to let it snap back
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.1}
+          whileTap={{ cursor: 'grabbing' }}
+        >
           {marqueeReviews.map((review, idx) => (
             <ReviewCard key={`${review.id}-${idx}`} review={review} />
           ))}
-        </div>
+        </motion.div>
         
-        {/* Dramatic edge vignettes */}
+        {/* Cinematic edge vignettes */}
         <div className="absolute inset-y-0 left-0 w-32 md:w-96 bg-gradient-to-r from-dark via-dark/90 to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-32 md:w-96 bg-gradient-to-l from-dark via-dark/90 to-transparent z-20 pointer-events-none" />
       </div>
