@@ -182,9 +182,8 @@ export function Footer() {
             <div className="max-w-7xl mx-auto px-4 md:px-8 mt-20 pt-10 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] text-accent/30 uppercase tracking-[0.4em] font-bold">
                 <div>&copy; {currentYear} {restaurantContent.name} Restaurant. All Rights Reserved.</div>
                 <div className="flex gap-8">
-                    <span className="cursor-pointer hover:text-white">Privacy Policy</span>
-                    <span className="cursor-pointer hover:text-white">Terms of Service</span>
-                    <span className="cursor-pointer hover:text-white">Cookie Policy</span>
+                    <Link href="/privacy-policy" className="cursor-pointer hover:text-white transition-colors duration-300">Privacy Policy</Link>
+                    <Link href="/terms-of-service" className="cursor-pointer hover:text-white transition-colors duration-300">Terms of Service</Link>
                 </div>
             </div>
         </footer>

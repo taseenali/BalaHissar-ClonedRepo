@@ -150,6 +150,8 @@ export default function BookingFlow() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [termsError, setTermsError] = useState('');
 
     const { dateStr: today, hour: currentHour } = getBradfordInfo();
     const tomorrow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }));
@@ -206,8 +208,14 @@ export default function BookingFlow() {
     };
 
     const handleConfirm = async () => {
+        if (!termsAccepted) {
+            setTermsError('You must agree to the Privacy Policy and Terms of Service to proceed.');
+            return;
+        }
+
         setIsSubmitting(true);
         setSubmitError('');
+        setTermsError('');
 
         try {
             const response = await fetch('/api/reservation', {
@@ -223,6 +231,8 @@ export default function BookingFlow() {
                     rawDate: selectedDate,
                     time: selectedTime,
                     guests: selectedGuests,
+                    termsAccepted: true,
+                    consentTimestamp: new Date().toISOString(),
                 }),
             });
 
@@ -562,6 +572,44 @@ export default function BookingFlow() {
                                         </span>
                                         <span className="text-white text-sm font-medium">{selectedGuests}</span>
                                     </div>
+                                </div>
+
+                                {/* Mandatory Consent */}
+                                <div className="max-w-sm mx-auto mb-8 text-left">
+                                    <label className="group flex items-start gap-3 cursor-pointer select-none">
+                                        <div className="relative flex items-center mt-0.5">
+                                            <input
+                                                type="checkbox"
+                                                checked={termsAccepted}
+                                                onChange={(e) => {
+                                                    setTermsAccepted(e.target.checked);
+                                                    if (e.target.checked) setTermsError('');
+                                                }}
+                                                className="peer sr-only"
+                                            />
+                                            <div className="w-5 h-5 border-2 border-primary/30 rounded bg-secondary/30 transition-all duration-300 peer-checked:bg-primary peer-checked:border-primary group-hover:border-primary/60 flex items-center justify-center">
+                                                <Check className={`w-3.5 h-3.5 text-dark transition-opacity duration-300 ${termsAccepted ? 'opacity-100' : 'opacity-0'}`} strokeWidth={4} />
+                                            </div>
+                                        </div>
+                                        <span className="text-[11px] md:text-xs text-accent/60 leading-relaxed font-medium transition-colors group-hover:text-accent/80">
+                                            I agree to the <Link href="/privacy-policy" target="_blank" className="text-primary hover:text-white underline underline-offset-4 decoration-primary/30 transition-all">Privacy Policy</Link> and <Link href="/terms-of-service" target="_blank" className="text-primary hover:text-white underline underline-offset-4 decoration-primary/30 transition-all">Terms of Service</Link>
+                                        </span>
+                                    </label>
+                                    
+                                    {termsError && (
+                                        <motion.p
+                                            initial={{ opacity: 0, y: -5 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="text-red-400/90 text-[10px] mt-3 font-medium flex items-center gap-2"
+                                        >
+                                            <span className="w-1 h-1 rounded-full bg-red-400" />
+                                            {termsError}
+                                        </motion.p>
+                                    )}
+
+                                    <p className="text-accent/40 text-[9px] mt-4 italic leading-relaxed">
+                                        Your information will be used to manage your reservation in accordance with our policies.
+                                    </p>
                                 </div>
 
                                 {submitError && (

@@ -24,11 +24,11 @@ function getBradfordInfo() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, phone, email, date, rawDate, time, guests } = body;
+        const { name, phone, email, date, rawDate, time, guests, termsAccepted } = body;
 
         // Ensure variables are present
-        if (!name || !phone || !date || !rawDate || !time || !guests) {
-            return NextResponse.json({ success: false, error: 'Missing required fields' }, { status: 400 });
+        if (!name || !phone || !date || !rawDate || !time || !guests || !termsAccepted) {
+            return NextResponse.json({ success: false, error: 'Consent to Privacy Policy and Terms is required' }, { status: 400 });
         }
 
         const { dateStr: todayStr, hour: currentHour } = getBradfordInfo();
@@ -64,6 +64,9 @@ ${email ? `📧 Email: ${email}` : ""}
 🗓 Date: ${date}
 ⏰ Time: ${time}
 👥 Guests: ${guests}
+
+✅ Legal Consent: Accepted
+⌚ Consent Time: ${new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' })}
 `;
 
         const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;

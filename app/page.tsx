@@ -5,6 +5,7 @@ import { dineInMenuData } from '@/data/menu';
 import { restaurantContent } from '@/data/content';
 import * as motion from 'framer-motion/client';
 import HeroSlider from '@/components/home/HeroSlider';
+import Reviews from '@/components/home/Reviews';
 
 // Explicit unique metadata for Home page
 export const metadata: Metadata = {
@@ -360,6 +361,9 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
+
+            {/* Reviews Section */}
+            <Reviews />
         </main>
     );
 }

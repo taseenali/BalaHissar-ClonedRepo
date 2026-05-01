@@ -77,6 +77,23 @@ body {
     border: 1px solid rgba(197, 160, 89, 0.1);
 }
 
+/* 100% Smooth Infinite Marquee */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 80s linear infinite;
+    will-change: transform;
+}
+
+.pause-marquee:hover .animate-marquee {
+    animation-play-state: paused;
+}
+
 .shimmer {
     position: relative;
     overflow: hidden;
