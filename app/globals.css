@@ -90,8 +90,17 @@ body {
     will-change: transform;
 }
 
-.pause-marquee:hover .animate-marquee {
+/* Pause ONLY when a card itself is hovered, not the gaps */
+.animate-marquee:has(.review-card:hover) {
     animation-play-state: paused;
+}
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.translate-z-20 {
+    transform: translateZ(20px);
 }
 
 .shimmer {
