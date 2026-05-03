@@ -22,6 +22,7 @@ export default function OrderOnlinePage() {
                     alt="Bala Hissar Takeaway"
                     fill
                     priority
+                    sizes="100vw"
                     className="object-cover object-center opacity-50"
                 />
                 <div className="relative z-20 text-center max-w-4xl mx-auto px-6">

@@ -21,6 +21,7 @@ export default function CateringPage() {
                     alt="Authentic Catering Spread"
                     fill
                     priority
+                    sizes="100vw"
                     className="object-cover object-center opacity-70"
                 />
                 <div className="relative z-20 text-center max-w-4xl mx-auto px-6">
@@ -72,6 +73,7 @@ export default function CateringPage() {
                                     src="/images/gallery/food/murgh-boti.webp"
                                     alt="Catering Dish 1"
                                     fill
+                                    sizes="(max-width: 768px) 50vw, 25vw"
                                     className="object-cover hover:scale-105 transition-transform duration-700"
                                 />
                             </div>
@@ -80,6 +82,7 @@ export default function CateringPage() {
                                     src="/images/gallery/food/qabili-palaw.webp"
                                     alt="Catering Dish 2"
                                     fill
+                                    sizes="(max-width: 768px) 50vw, 25vw"
                                     className="object-cover hover:scale-105 transition-transform duration-700"
                                 />
                             </div>

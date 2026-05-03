@@ -24,6 +24,7 @@ const StarRating = ({ rating, size = 12, activeColor = "#C5A059" }: { rating: nu
 
 const ReviewCard = ({ review }: { review: Review }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isInteracting, setIsInteracting] = useState(false);
   
   // Motion values for 3D tilt and shine
   const x = useMotionValue(0);
@@ -58,7 +59,12 @@ const ReviewCard = ({ review }: { review: Review }) => {
     mouseY.set(posY);
   }
 
+  function startInteraction() {
+    setIsInteracting(true);
+  }
+
   function resetInteraction() {
+    setIsInteracting(false);
     x.set(0);
     y.set(0);
   }
@@ -67,8 +73,12 @@ const ReviewCard = ({ review }: { review: Review }) => {
     <div className="flex-shrink-0 w-[280px] md:w-[400px] mx-6 py-12 perspective-1000 review-card">
       <motion.div
         ref={cardRef}
-        onMouseMove={(e) => handleInteraction(e.clientX, e.clientY)}
+        onMouseMove={(e) => {
+          handleInteraction(e.clientX, e.clientY);
+          startInteraction();
+        }}
         onMouseLeave={resetInteraction}
+        onTouchStart={startInteraction}
         onTouchMove={(e) => {
           if (e.touches[0]) {
             handleInteraction(e.touches[0].clientX, e.touches[0].clientY);
@@ -84,14 +94,14 @@ const ReviewCard = ({ review }: { review: Review }) => {
         className="relative group h-full cursor-pointer touch-none"
       >
         {/* Blue Glow Background */}
-        <div className="absolute -inset-[2px] bg-gradient-to-br from-blue-500/20 via-primary/20 to-blue-600/20 rounded-2xl blur-[4px] opacity-20 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className={`absolute -inset-[2px] bg-gradient-to-br from-blue-500/20 via-primary/20 to-blue-600/20 rounded-2xl blur-[4px] transition-opacity duration-700 ${isInteracting ? 'opacity-100' : 'opacity-20 group-hover:opacity-100'}`} />
         
         {/* Main Card Body (Blueish Tint & High Transparency) */}
-        <div className="relative h-full overflow-hidden rounded-2xl p-8 bg-secondary/15 backdrop-blur-[24px] border border-blue-400/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 group-hover:border-blue-400/30 group-hover:shadow-[0_20px_80px_rgba(59,130,246,0.15)]">
+        <div className={`relative h-full overflow-hidden rounded-2xl p-8 bg-secondary/15 backdrop-blur-[24px] border shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 ${isInteracting ? 'border-blue-400/30 shadow-[0_20px_80px_rgba(59,130,246,0.15)]' : 'border-blue-400/10 group-hover:border-blue-400/30 group-hover:shadow-[0_20px_80px_rgba(59,130,246,0.15)]'}`}>
           
           {/* Dynamic Shine Layer */}
           <motion.div 
-            className="absolute inset-0 z-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
+            className={`absolute inset-0 z-0 pointer-events-none transition-opacity ${isInteracting ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
             style={{
               background: useTransform(
                 [shineX, shineY],
@@ -211,7 +221,6 @@ export default function Reviews() {
           dragElastic={0.1}
           onDragStart={() => setIsPaused(true)}
           onDragEnd={() => setIsPaused(false)}
-          // Fix for mobile "stuck" pause: only pause while actively touching
           onPointerDown={() => setIsPaused(true)}
           onPointerUp={() => setIsPaused(false)}
         >

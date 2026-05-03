@@ -20,8 +20,31 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: 'Contact Bala Hissar',
+        description: 'Find location, phone number and opening hours for Bala Hissar Restaurant in Bradford.',
+        mainEntity: {
+            '@type': 'Restaurant',
+            name: 'Bala Hissar',
+            telephone: '01274 780951',
+            address: {
+                '@type': 'PostalAddress',
+                streetAddress: '46-50 Highgate, Heaton',
+                addressLocality: 'Bradford',
+                postalCode: 'BD9 4BE',
+                addressCountry: 'GB',
+            },
+        },
+    };
+
     return (
         <section className="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-8">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

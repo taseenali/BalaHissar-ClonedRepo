@@ -24,8 +24,53 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Restaurant',
+        name: 'Bala Hissar',
+        image: 'https://mybalahissar.co.uk/icon.png',
+        '@id': 'https://mybalahissar.co.uk',
+        url: 'https://mybalahissar.co.uk',
+        telephone: '01274 780951',
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: '46-50 Highgate, Heaton',
+            addressLocality: 'Bradford',
+            postalCode: 'BD9 4BE',
+            addressCountry: 'GB',
+        },
+        geo: {
+            '@type': 'GeoCoordinates',
+            latitude: 53.8156,
+            longitude: -1.7856,
+        },
+        openingHoursSpecification: [
+            {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                opens: '17:30',
+                closes: '22:00',
+            },
+            {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Saturday', 'Sunday'],
+                opens: '10:00',
+                closes: '15:00',
+            },
+        ],
+        menu: 'https://mybalahissar.co.uk/menu',
+        servesCuisine: ['Pakistani', 'Pashtun', 'Afghan'],
+        priceRange: '££',
+    };
+
     return (
         <main className="min-h-screen bg-dark">
+            {/* Schema.org Structured Data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+
             {/* Hero Section */}
             <section id="home" className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden scroll-mt-20">
                 <HeroSlider />
@@ -94,6 +139,7 @@ export default function HomePage() {
                             alt="Restaurant ambience at Bala Hissar"
                             width={600}
                             height={400}
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="rounded-2xl shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] w-full"
                         />
                     </motion.div>
@@ -279,6 +325,7 @@ export default function HomePage() {
                                         alt={img.title}
                                         width={600}
                                         height={600}
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 300px"
                                         className="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-110"
                                     />
                                     {/* Desktop Hover Overlay */}
@@ -315,6 +362,7 @@ export default function HomePage() {
                                         alt={img.title}
                                         width={600}
                                         height={320}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
                                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">

@@ -4,31 +4,59 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function ContactForm() {
+    const getBradfordDate = () => {
+        const now = new Date();
+        // en-CA naturally produces YYYY-MM-DD format
+        return new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Europe/London',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        }).format(now);
+    };
+
     const [formData, setFormData] = useState({
-        name: '',
+        fullName: '',
         phone: '',
-        eventType: '',
+        enquiryType: '',
         guests: '',
-        date: '',
+        preferredDate: '',
         message: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSent, setIsSent] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (error) setError(null);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setError(null);
         
-        // Simulate API call
-        console.log('Form Data Submitted:', formData);
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        setIsSubmitting(false);
-        setIsSent(true);
+        try {
+            const response = await fetch('/api/enquiry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.error || 'Failed to send enquiry');
+            }
+
+            setIsSent(true);
+        } catch (err) {
+            console.error('Submission Error:', err);
+            const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+            setError(message);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (isSent) {
@@ -72,13 +100,13 @@ export default function ContactForm() {
 
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                     <div className="space-y-2">
-                        <label htmlFor="name" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Full Name *</label>
+                        <label htmlFor="fullName" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Full Name *</label>
                         <input
                             required
                             type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
+                            id="fullName"
+                            name="fullName"
+                            value={formData.fullName}
                             onChange={handleChange}
                             placeholder="NAME"
                             className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all placeholder:text-white/10"
@@ -99,13 +127,13 @@ export default function ContactForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="eventType" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Enquiry Type *</label>
+                        <label htmlFor="enquiryType" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Enquiry Type *</label>
                         <div className="relative">
                             <select
                                 required
-                                id="eventType"
-                                name="eventType"
-                                value={formData.eventType}
+                                id="enquiryType"
+                                name="enquiryType"
+                                value={formData.enquiryType}
                                 onChange={handleChange}
                                 className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all appearance-none cursor-pointer uppercase"
                             >
@@ -135,12 +163,13 @@ export default function ContactForm() {
                     </div>
 
                     <div className="md:col-span-2 space-y-2">
-                        <label htmlFor="date" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Preferred Date</label>
+                        <label htmlFor="preferredDate" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Preferred Date</label>
                         <input
                             type="date"
-                            id="date"
-                            name="date"
-                            value={formData.date}
+                            id="preferredDate"
+                            name="preferredDate"
+                            min={getBradfordDate()}
+                            value={formData.preferredDate}
                             onChange={handleChange}
                             className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all [color-scheme:dark]"
                         />
@@ -154,18 +183,31 @@ export default function ContactForm() {
                             rows={4}
                             value={formData.message}
                             onChange={handleChange}
-                            placeholder="ANY SPECIAL REQUIREMENTS OR QUESTIONS..."
-                            className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all placeholder:text-white/10 resize-none whitespace-pre-wrap"
+                            placeholder="TELL US MORE ABOUT YOUR REQUEST..."
+                            className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all placeholder:text-white/10 resize-none"
                         />
                     </div>
 
-                    <div className="md:col-span-2 pt-6">
+                    {error && (
+                        <div className="md:col-span-2 text-red-400 text-xs text-center font-medium bg-red-400/10 py-3 rounded-lg border border-red-400/20">
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="md:col-span-2 flex justify-center mt-4">
                         <button
-                            type="submit"
                             disabled={isSubmitting}
-                            className="w-full md:w-auto md:min-w-[240px] bg-primary text-dark font-black tracking-[0.3em] uppercase text-[10px] p-5 rounded-xl shimmer active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:text-dark"
+                            type="submit"
+                            className="relative overflow-hidden bg-primary text-dark px-12 py-5 rounded-full font-black uppercase tracking-[0.3em] text-xs transition-all hover:bg-white hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:hover:translate-y-0 shadow-[0_15px_30px_rgba(197,160,89,0.2)] group"
                         >
-                            {isSubmitting ? 'SENDING...' : 'SEND ENQUIRY'}
+                            <span className={isSubmitting ? 'opacity-0' : 'opacity-100'}>
+                                Send Enquiry
+                            </span>
+                            {isSubmitting && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="w-5 h-5 border-2 border-dark/30 border-t-dark rounded-full animate-spin" />
+                                </div>
+                            )}
                         </button>
                     </div>
                 </form>
