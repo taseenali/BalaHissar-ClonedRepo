@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
                             If you have any questions about this policy, you can contact us at:
                         </p>
                         <ul className="list-none p-0 mt-2 space-y-1 text-primary">
-                            <li>Email: info@mybalahissar.co.uk</li>
+                            <li>Email: contact@mybalahissar.co.uk</li>
                             <li>Phone: {restaurantContent.contact.phone}</li>
                             <li>Address: {restaurantContent.contact.address}</li>
                         </ul>
@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
                             <li>Withdraw consent (for marketing)</li>
                         </ul>
                         <p className="mt-4">
-                            To exercise your rights, contact us at <span className="text-primary font-medium">info@mybalahissar.co.uk</span>.
+                            To exercise your rights, contact us at <span className="text-primary font-medium">contact@mybalahissar.co.uk</span>.
                         </p>
                     </section>
 

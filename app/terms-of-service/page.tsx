@@ -43,7 +43,7 @@ export default function TermsOfServicePage() {
                             For any enquiries:
                         </p>
                         <ul className="list-none p-0 mt-2 space-y-1 text-primary">
-                            <li>Email: info@mybalahissar.co.uk</li>
+                            <li>Email: contact@mybalahissar.co.uk</li>
                             <li>Phone: {restaurantContent.contact.phone}</li>
                         </ul>
                     </section>
