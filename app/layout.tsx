@@ -22,11 +22,6 @@ const BASE_URL = 'https://mybalahissar.co.uk';
 
 export const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
-    icons: {
-        icon: '/icon.png',
-        shortcut: '/icon.png',
-        apple: '/icon.png',
-    },
     openGraph: {
         images: [
             {
