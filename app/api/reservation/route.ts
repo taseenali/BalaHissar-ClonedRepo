@@ -72,9 +72,9 @@ export async function POST(request: Request) {
 
         // 4. Internal Notification (To Restaurant)
         const restaurantMailOptions = {
-            from: process.env.EMAIL_USER,
+            from: `"Bala Hissar" <${process.env.EMAIL_USER}>`,
             to: process.env.EMAIL_USER,
-            subject: 'New Table Booking - Bala Hissar',
+            subject: 'Table Booking Details',
             html: `
                 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px; border: 1px solid #C5A059; border-radius: 20px; background-color: #0B1C2C; color: #F5F5F5;">
                     <h1 style="color: #C5A059; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; text-align: center; border-bottom: 1px solid rgba(197,160,89,0.2); padding-bottom: 20px;">
@@ -129,9 +129,9 @@ export async function POST(request: Request) {
 
         // 5. Customer Confirmation Email
         const customerMailOptions = {
-            from: process.env.EMAIL_USER,
+            from: `"Bala Hissar" <${process.env.EMAIL_USER}>`,
             to: email,
-            subject: 'Your Booking Request - Bala Hissar',
+            subject: 'Table Booking Details',
             text: `Hi ${name},
 
 Thank you for your booking request at Bala Hissar.
