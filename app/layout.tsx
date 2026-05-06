@@ -27,6 +27,21 @@ export const metadata: Metadata = {
         shortcut: '/icon.png',
         apple: '/icon.png',
     },
+    openGraph: {
+        images: [
+            {
+                url: '/images/logo_meta.png',
+                width: 1200,
+                height: 630,
+            },
+        ],
+        locale: 'en_GB',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        images: ['/images/logo_meta.png'],
+    },
 };
 
 export default function RootLayout({

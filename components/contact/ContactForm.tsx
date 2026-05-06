@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function ContactForm() {
     const getBradfordDate = () => {
@@ -18,6 +19,7 @@ export default function ContactForm() {
     const [formData, setFormData] = useState({
         fullName: '',
         phone: '',
+        email: '',
         enquiryType: '',
         guests: '',
         preferredDate: '',
@@ -37,11 +39,18 @@ export default function ContactForm() {
         setIsSubmitting(true);
         setError(null);
         
+        // Format date to dd/mm/yyyy if present
+        const submissionData = { ...formData };
+        if (formData.preferredDate) {
+            const [year, month, day] = formData.preferredDate.split('-');
+            submissionData.preferredDate = `${day}/${month}/${year}`;
+        }
+
         try {
             const response = await fetch('/api/enquiry', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(submissionData)
             });
 
             if (!response.ok) {
@@ -66,8 +75,16 @@ export default function ContactForm() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="mt-12 md:mt-20 p-12 rounded-3xl glass-panel text-center border border-primary/20"
             >
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary text-4xl mx-auto mb-6 border border-primary/20">
-                    ✨
+                <div className="w-24 h-24 bg-primary/5 rounded-full flex items-center justify-center p-0 mx-auto mb-8 border border-primary/30 shadow-[0_0_30px_rgba(197,160,89,0.15)] overflow-hidden">
+                    <div className="relative w-full h-full">
+                        <Image
+                            src="/images/logo.png"
+                            alt="Bala Hissar Logo"
+                            fill
+                            sizes="80px"
+                            className="object-contain"
+                        />
+                    </div>
                 </div>
                 <h2 className="text-3xl font-serif text-gradient-gold mb-4 italic">Thank You!</h2>
                 <p className="text-accent/70 max-w-sm mx-auto leading-relaxed text-sm">
@@ -126,6 +143,20 @@ export default function ContactForm() {
                         />
                     </div>
 
+                    <div className="md:col-span-2 space-y-2">
+                        <label htmlFor="email" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Email Address *</label>
+                        <input
+                            required
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="EMAIL@EXAMPLE.COM"
+                            className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all placeholder:text-white/10"
+                        />
+                    </div>
+
                     <div className="space-y-2">
                         <label htmlFor="enquiryType" className="text-[10px] uppercase tracking-widest text-primary font-black ml-1">Enquiry Type *</label>
                         <div className="relative">
@@ -173,6 +204,11 @@ export default function ContactForm() {
                             onChange={handleChange}
                             className="w-full bg-secondary/30 border border-primary/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-primary/40 transition-all [color-scheme:dark]"
                         />
+                        {formData.preferredDate && (
+                            <p className="text-primary/70 text-[10px] uppercase tracking-widest mt-2 ml-1 italic font-bold">
+                                Selected: {formData.preferredDate.split('-').reverse().join('/')}
+                            </p>
+                        )}
                     </div>
 
                     <div className="md:col-span-2 space-y-2">

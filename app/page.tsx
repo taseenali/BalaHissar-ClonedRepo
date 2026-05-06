@@ -9,17 +9,32 @@ import Reviews from '@/components/home/Reviews';
 
 // Explicit unique metadata for Home page
 export const metadata: Metadata = {
-    title: 'Bala Hissar | Premium Pakistani Restaurant in Bradford',
+    title: 'Bala Hissar | Pakistani & Peshawari Buffet Restaurant in Bradford',
     description: 'Experience authentic Pakistani cuisine at Bala Hissar in Bradford, renowned for its traditional charcoal-grilled kebabs, rich Kabuli Palow, and elegant dining atmosphere.',
     alternates: {
         canonical: 'https://mybalahissar.co.uk',
     },
     openGraph: {
-        title: 'Bala Hissar | Premium Pakistani Restaurant',
-        description: 'Discover the rich culinary heritage of Pakistan with exceptional dining at Bala Hissar, Bradford.',
+        title: 'Bala Hissar | Pakistani & Peshawari Buffet Restaurant in Bradford',
+        description: 'Experience the finest Pakistani & Peshawari cuisine in Bradford. Traditional charcoal grills, rich Kabuli Palow, and an elegant buffet experience.',
         url: 'https://mybalahissar.co.uk',
         siteName: 'Bala Hissar Restaurant',
+        images: [
+            {
+                url: '/images/logo_meta.png',
+                width: 1200,
+                height: 630,
+                alt: 'Bala Hissar Restaurant - Pakistani & Peshawari Cuisine',
+            },
+        ],
+        locale: 'en_GB',
         type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Bala Hissar | Pakistani & Peshawari Buffet Restaurant in Bradford',
+        description: 'Experience authentic Pakistani & Peshawari cuisine in Bradford. Exceptional buffet with traditional charcoal grills.',
+        images: ['/images/logo_meta.png'],
     },
 };
 
@@ -379,7 +394,7 @@ export default function HomePage() {
                             Events & Celebrations
                         </h3>
                         <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden group border border-white/5 shadow-2xl">
-                            <Image 
+                            <Image
                                 src="/images/event-hall/banqueting-hall.webp"
                                 alt="Event Hall"
                                 fill
@@ -387,7 +402,7 @@ export default function HomePage() {
                                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent flex flex-col justify-end p-8 md:p-12">
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -398,7 +413,7 @@ export default function HomePage() {
                                     <p className="text-accent/80 text-sm md:text-lg mb-8 leading-relaxed">
                                         Whether you&apos;re planning a wedding, a corporate event, or an intimate gathering, Bala Hissar&apos;s catering service brings the authentic flavors of Peshawar to your table. Our premium event hall provides the perfect backdrop for your celebrations.
                                     </p>
-                                    <Link 
+                                    <Link
                                         href="/event-hall"
                                         className="inline-block bg-primary text-dark px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 shadow-xl text-sm md:text-base shimmer"
                                     >

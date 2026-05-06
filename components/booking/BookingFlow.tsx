@@ -188,8 +188,8 @@ export default function BookingFlow() {
 
     const formatDisplayDate = (dateStr: string): string => {
         if (!dateStr) return '';
-        const d = new Date(dateStr + 'T12:00:00');
-        return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        const [year, month, day] = dateStr.split('-');
+        return `${day}/${month}/${year}`;
     };
 
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -400,9 +400,9 @@ export default function BookingFlow() {
                                         <motion.p
                                             initial={{ opacity: 0, y: 5 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className="text-primary/70 text-sm mt-4 italic"
+                                            className="text-primary/70 text-[11px] uppercase tracking-widest mt-4 italic font-bold"
                                         >
-                                            {formatDisplayDate(selectedDate)}
+                                            Selected: {formatDisplayDate(selectedDate)}
                                         </motion.p>
                                     )}
                                 </div>
