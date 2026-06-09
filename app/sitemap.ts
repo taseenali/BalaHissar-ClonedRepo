@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/order-online',
         '/privacy-policy',
         '/terms-of-service',
+        '/cookies',
     ];
 
     return routes.map((route) => ({

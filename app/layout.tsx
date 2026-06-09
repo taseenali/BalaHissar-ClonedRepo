@@ -4,6 +4,8 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { HashRedirectHandler } from '@/components/HashRedirectHandler';
+import { CookieConsent } from '@/components/CookieConsent';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 
 const playfair = Playfair_Display({
     subsets: ['latin'],
@@ -65,6 +67,12 @@ export default function RootLayout({
 
                 {/* Rendering order: 6) Footer */}
                 <Footer />
+
+                {/* Cookie consent banner — shown only if no prior choice stored in localStorage */}
+                <CookieConsent />
+
+                {/* Google Analytics — loads only after cookie consent is accepted */}
+                <GoogleAnalytics />
             </body>
         </html>
     );
