@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import BookingFlow from '@/components/booking/BookingFlow';
+import BookingUnavailable from '@/components/booking/BookingUnavailable';
+import { BOOKINGS_ENABLED } from '@/data/bookingStatus';
 
 export const metadata: Metadata = {
     title: 'Book a Table | Bala Hissar Restaurant',
@@ -53,7 +55,7 @@ export default function BookTablePage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <BookingFlow />
+            {BOOKINGS_ENABLED ? <BookingFlow /> : <BookingUnavailable />}
         </section>
     );
 }

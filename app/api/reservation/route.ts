@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { BOOKINGS_ENABLED } from '@/data/bookingStatus';
 
 function getBradfordInfo() {
     const now = new Date();
@@ -23,6 +24,10 @@ function getBradfordInfo() {
 }
 
 export async function POST(request: Request) {
+    if (!BOOKINGS_ENABLED) {
+        return NextResponse.json({ success: false, error: 'Table reservation is temporarily unavailable' }, { status: 503 });
+    }
+
     try {
         const body = await request.json();
         const { name, phone, email, date, rawDate, time, guests, termsAccepted, notes } = body;
